@@ -10,16 +10,39 @@ This is the public face of my job search. It holds only information that is fine
 
 ## How it is organized
 
-Each application gets its own folder with a self-contained landing page:
+Applications are grouped by company, then by role, so a company with several openings stays tidy:
 
 ```
 /applications
-  /<company>-<role>/
-    index.html      the landing page for that role
-    assets/         any images or styles specific to that page
+  /<company>/
+    index.html          optional company overview, links to each role
+    assets/             shared company assets (logo, brand color)
+    /<role-slug>/
+      index.html        the landing page for that role
+      assets/           images or styles specific to this page
 ```
 
-Shared layout, styling, and reusable pieces live at the project root so individual pages stay light.
+For example:
+
+```
+/applications
+  /vercel/
+    index.html
+    /ai-sdk/
+      index.html
+    /forward-deployed-engineer/
+      index.html
+  /calendly/
+    /full-stack-engineer-iii/
+      index.html
+```
+
+The folders map directly to URLs, so this becomes `/applications/vercel/ai-sdk/` on the live site. A single reusable page template lives at the repo root, and each landing page starts from it so they stay consistent and light.
+
+### Conventions
+
+- Lowercase, hyphenated slugs for company and role folders (`ai-sdk`, not `AI SDK`).
+- Page-specific assets go in that role's `assets/`; anything shared across a company's roles goes in the company-level `assets/`.
 
 ## Focus areas
 
