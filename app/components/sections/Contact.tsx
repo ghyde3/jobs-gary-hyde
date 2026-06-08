@@ -195,6 +195,7 @@ export function Contact() {
                 <Button
                   variant="primary"
                   size="lg"
+                  type="submit"
                   disabled={status === 'sending'}
                 >
                   {status === 'sending' ? 'Sending...' : 'Send message'}

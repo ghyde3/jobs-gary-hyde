@@ -8,6 +8,7 @@ interface ButtonProps {
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   href?: string;
+  type?: 'button' | 'submit';
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
   onClick?: () => void;
@@ -20,6 +21,7 @@ export function Button({
   size = 'md',
   disabled = false,
   href,
+  type = 'button',
   leftIcon,
   rightIcon,
   onClick,
@@ -102,7 +104,7 @@ export function Button({
 
   return (
     <button
-      type="button"
+      type={type}
       style={style}
       disabled={disabled}
       onClick={disabled ? undefined : onClick}
