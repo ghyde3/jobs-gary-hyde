@@ -1,0 +1,347 @@
+<!-- @dsCard group="Portfolio" viewport="1280x900" name="Portfolio Site" subtitle="Personal developer homepage — hero, projects, skills, about, contact" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gary Hyde — Senior Full-Stack Developer</title>
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #09090B; color: #FAFAFA; font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 40px; width: 100%; }
+  .section { padding: 96px 0; }
+  .section-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #52525B; letter-spacing: 0.14em; margin-bottom: 20px; }
+  .section-heading { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 2.25rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: #FAFAFA; margin-bottom: 16px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+/* ── Inlined DS Components ─────────────────────────────────── */
+
+function Button({ children, variant='primary', size='md', disabled=false, href, leftIcon, rightIcon, onClick, fullWidth=false }) {
+  const [hov, setHov] = React.useState(false);
+  const [pressed, setPressed] = React.useState(false);
+  const base = { display:'inline-flex', alignItems:'center', justifyContent:'center', gap:'8px', fontFamily:"'DM Sans',system-ui,sans-serif", fontWeight:500, lineHeight:1, border:'1px solid transparent', cursor:disabled?'not-allowed':'pointer', opacity:disabled?0.45:1, textDecoration:'none', whiteSpace:'nowrap', WebkitFontSmoothing:'antialiased', transform:pressed&&!disabled?'scale(0.98)':'scale(1)', transition:'background-color 150ms ease, border-color 150ms ease, color 150ms ease', width:fullWidth?'100%':undefined };
+  const sizes = { sm:{padding:'0 12px',fontSize:'11px',borderRadius:'4px',height:'30px',letterSpacing:'0.04em'}, md:{padding:'0 20px',fontSize:'13px',borderRadius:'6px',height:'38px'}, lg:{padding:'0 24px',fontSize:'16px',borderRadius:'6px',height:'46px'} };
+  const variants = {
+    primary:   { backgroundColor:hov&&!disabled?'#FCD34D':'#F59E0B', color:'#09090B', borderColor:'transparent' },
+    secondary: { backgroundColor:hov&&!disabled?'#1F1F23':'#18181B', color:hov?'#FAFAFA':'#A1A1AA', borderColor:hov?'rgba(255,255,255,0.16)':'rgba(255,255,255,0.08)' },
+    ghost:     { backgroundColor:hov&&!disabled?'rgba(255,255,255,0.06)':'transparent', color:hov?'#FAFAFA':'#A1A1AA', borderColor:'transparent' },
+    danger:    { backgroundColor:hov&&!disabled?'rgba(239,68,68,0.18)':'rgba(239,68,68,0.12)', color:'#EF4444', borderColor:'rgba(239,68,68,0.25)' },
+  };
+  const style = {...base, ...sizes[size], ...variants[variant]};
+  const Tag = href ? 'a' : 'button';
+  return <Tag style={style} href={href} type={href?undefined:'button'} disabled={href?undefined:disabled} onClick={disabled?undefined:onClick} onMouseEnter={()=>setHov(true)} onMouseLeave={()=>{setHov(false);setPressed(false);}} onMouseDown={()=>setPressed(true)} onMouseUp={()=>setPressed(false)}>
+    {leftIcon && <span style={{display:'flex',alignItems:'center'}}>{leftIcon}</span>}
+    {children}
+    {rightIcon && <span style={{display:'flex',alignItems:'center'}}>{rightIcon}</span>}
+  </Tag>;
+}
+
+function Badge({ children, variant='neutral', size='md', dot=false }) {
+  const sizes = { sm:{padding:'2px 8px',fontSize:'10px'}, md:{padding:'3px 10px',fontSize:'11px'} };
+  const variants = {
+    neutral: { backgroundColor:'#1F1F23', color:'#A1A1AA', borderColor:'rgba(255,255,255,0.08)' },
+    accent:  { backgroundColor:'rgba(245,158,11,0.12)', color:'#F59E0B', borderColor:'rgba(245,158,11,0.25)' },
+    success: { backgroundColor:'rgba(34,197,94,0.12)', color:'#22C55E', borderColor:'rgba(34,197,94,0.25)' },
+    error:   { backgroundColor:'rgba(239,68,68,0.12)', color:'#EF4444', borderColor:'rgba(239,68,68,0.25)' },
+    warning: { backgroundColor:'rgba(245,158,11,0.12)', color:'#F59E0B', borderColor:'rgba(245,158,11,0.25)' },
+    info:    { backgroundColor:'rgba(59,130,246,0.12)', color:'#3B82F6', borderColor:'rgba(59,130,246,0.25)' },
+  };
+  const dotColors = { neutral:'#71717A', accent:'#F59E0B', success:'#22C55E', error:'#EF4444', warning:'#F59E0B', info:'#3B82F6' };
+  const style = { display:'inline-flex', alignItems:'center', gap:'6px', fontFamily:"'DM Sans',system-ui,sans-serif", fontWeight:500, lineHeight:1, borderRadius:'9999px', border:'1px solid', whiteSpace:'nowrap', ...sizes[size], ...variants[variant] };
+  return <span style={style}>{dot && <span style={{width:'6px',height:'6px',borderRadius:'50%',backgroundColor:dotColors[variant],flexShrink:0}} />}{children}</span>;
+}
+
+function Tag({ children, size='md', active=false, onClick }) {
+  const [hov, setHov] = React.useState(false);
+  const interactive = Boolean(onClick);
+  const style = { display:'inline-flex', alignItems:'center', fontFamily:"'JetBrains Mono',monospace", lineHeight:1, borderRadius:'4px', border:'1px solid', whiteSpace:'nowrap', cursor:interactive?'pointer':'default', transition:'background-color 150ms ease, border-color 150ms ease, color 150ms ease',
+    ...(size==='sm' ? {padding:'2px 7px',fontSize:'10px'} : {padding:'3px 9px',fontSize:'11px'}),
+    ...(active ? {backgroundColor:'rgba(245,158,11,0.12)',color:'#F59E0B',borderColor:'rgba(245,158,11,0.25)'}
+       : hov&&interactive ? {backgroundColor:'#1F1F23',color:'#FAFAFA',borderColor:'rgba(255,255,255,0.16)'}
+       : {backgroundColor:'#111113',color:'#71717A',borderColor:'rgba(255,255,255,0.08)'}) };
+  return <span style={style} onClick={onClick} onMouseEnter={()=>setHov(true)} onMouseLeave={()=>setHov(false)}>{children}</span>;
+}
+
+function Card({ children, padding='md', hoverable=false, href, onClick, header, footer }) {
+  const [hov, setHov] = React.useState(false);
+  const interactive = hoverable || Boolean(href) || Boolean(onClick);
+  const pads = { none:'0', sm:'16px', md:'24px', lg:'32px' };
+  const style = { display:'flex', flexDirection:'column', backgroundColor:'#111113', border:'1px solid', borderColor:hov&&interactive?'rgba(255,255,255,0.16)':'rgba(255,255,255,0.08)', borderRadius:'10px', overflow:'hidden', cursor:interactive?'pointer':'default', textDecoration:'none', color:'inherit', transition:'border-color 150ms ease, transform 220ms ease, box-shadow 150ms ease', transform:hov&&interactive?'translateY(-2px)':'translateY(0)', boxShadow:hov&&interactive?'0 10px 20px rgba(0,0,0,0.5)':'none' };
+  const Tag = href ? 'a' : 'div';
+  return <Tag style={style} href={href} onMouseEnter={()=>setHov(true)} onMouseLeave={()=>setHov(false)} onClick={onClick}>
+    {header && <div style={{padding:pads[padding],borderBottom:'1px solid rgba(255,255,255,0.08)',flexShrink:0}}>{header}</div>}
+    <div style={{padding:pads[padding],flex:1}}>{children}</div>
+    {footer && <div style={{padding:`16px ${pads[padding]}`,borderTop:'1px solid rgba(255,255,255,0.08)',flexShrink:0}}>{footer}</div>}
+  </Tag>;
+}
+
+function NavBar({ logo, links=[], cta, currentPath='', onLinkClick }) {
+  const [scrolled, setScrolled] = React.useState(false);
+  React.useEffect(() => {
+    const h = () => setScrolled(window.scrollY > 12);
+    window.addEventListener('scroll', h, {passive:true});
+    return () => window.removeEventListener('scroll', h);
+  }, []);
+  const isActive = href => currentPath === href || (href !== '/' && currentPath.startsWith(href));
+  return <nav style={{ position:'fixed', top:0, left:0, right:0, height:'60px', zIndex:200, display:'flex', alignItems:'center', padding:'0 24px', backgroundColor:scrolled?'rgba(9,9,11,0.88)':'transparent', backdropFilter:scrolled?'blur(12px) saturate(150%)':'none', WebkitBackdropFilter:scrolled?'blur(12px) saturate(150%)':'none', borderBottom:scrolled?'1px solid rgba(255,255,255,0.08)':'1px solid transparent', transition:'background-color 220ms ease, border-color 220ms ease' }}>
+    <a href="/" style={{display:'flex',alignItems:'center',gap:'12px',textDecoration:'none',color:'#FAFAFA',fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:700,fontSize:'16px',letterSpacing:'-0.02em',flexShrink:0}}>{logo||'GH'}</a>
+    <div style={{display:'flex',alignItems:'center',gap:'4px',marginLeft:'auto',marginRight:cta?'16px':'0'}}>
+      {links.map(({label,href},i) => {
+        const active = isActive(href);
+        return <a key={i} href={href} onClick={onLinkClick?(e)=>onLinkClick(e,href):undefined} style={{display:'inline-flex',alignItems:'center',padding:'0 12px',height:'34px',fontSize:'13px',fontFamily:"'DM Sans',system-ui,sans-serif",fontWeight:active?500:400,color:active?'#FAFAFA':'#71717A',textDecoration:'none',borderRadius:'4px',transition:'color 150ms ease, background-color 150ms ease'}}
+          onMouseEnter={e=>{e.currentTarget.style.color='#FAFAFA';e.currentTarget.style.backgroundColor='rgba(255,255,255,0.04)';}}
+          onMouseLeave={e=>{e.currentTarget.style.color=active?'#FAFAFA':'#71717A';e.currentTarget.style.backgroundColor='transparent';}}
+        >{label}</a>;
+      })}
+    </div>
+    {cta && <div>{cta}</div>}
+  </nav>;
+}
+
+function Avatar({ name, size='md' }) {
+  const sizes = { xs:24, sm:32, md:40, lg:56, xl:80 };
+  const fontSizes = { xs:'9px', sm:'11px', md:'14px', lg:'20px', xl:'28px' };
+  const px = sizes[size] || 40;
+  const initials = name ? name.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase() : '?';
+  return <div style={{width:`${px}px`,height:`${px}px`,borderRadius:'50%',overflow:'hidden',flexShrink:0,display:'inline-flex',alignItems:'center',justifyContent:'center',backgroundColor:'rgba(245,158,11,0.12)',border:'1px solid rgba(255,255,255,0.08)',fontFamily:"'Space Grotesk',system-ui,sans-serif",fontSize:fontSizes[size],fontWeight:700,color:'#F59E0B',letterSpacing:'-0.03em',userSelect:'none'}}>{initials}</div>;
+}
+
+function Divider({ label, spacing='md' }) {
+  const spacings = { sm:'24px', md:'40px', lg:'64px' };
+  const m = spacings[spacing];
+  if (!label) return <hr style={{border:'none',borderTop:'1px solid rgba(255,255,255,0.08)',margin:`${m} 0`,width:'100%'}} />;
+  return <div style={{display:'flex',alignItems:'center',gap:'16px',margin:`${m} 0`,width:'100%'}}>
+    <div style={{flex:1,height:'1px',backgroundColor:'rgba(255,255,255,0.08)'}} />
+    <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'11px',color:'#52525B',letterSpacing:'0.14em',flexShrink:0}}>{label}</span>
+    <div style={{flex:1,height:'1px',backgroundColor:'rgba(255,255,255,0.08)'}} />
+  </div>;
+}
+
+/* ── Data ──────────────────────────────────────────────────── */
+
+const PROJECTS = [
+  { id:1, status:'shipped', category:'AI / Search', title:'Vector Search Platform', sub:'Replaced Elasticsearch with pgvector + OpenAI embeddings', desc:'Semantic search built on PostgreSQL via pgvector. Replaced a brittle Elasticsearch cluster with 40 lines of SQL and OpenAI ada-002 embeddings. Handles 8M documents and natural-language queries.', metrics:['58ms p95 (was 420ms)','70% infra cost reduction','18 months · 99.97% uptime'], stack:['Next.js','PostgreSQL','pgvector','OpenAI API','Redis','TypeScript'] },
+  { id:2, status:'shipped', category:'Platform', title:'Developer API Platform', sub:'REST + GraphQL, 200+ external integrations', desc:'Public API platform with REST and GraphQL endpoints, rate limiting, idempotent webhook delivery, and a self-serve developer portal. Designed the data model, wrote the API, and shipped the portal solo.', metrics:['$2.4M ARR in year one','200+ active integrations','<50ms median response'], stack:['Next.js','Node.js','PostgreSQL','GraphQL','Stripe','AWS','TypeScript'] },
+  { id:3, status:'shipped', category:'Data', title:'Real-Time Analytics Dashboard', sub:'Streaming live data at 120k DAU', desc:"Analytics dashboard with live WebSocket updates, 60fps charting, and a sub-100ms ingestion pipeline. Replaced a nightly-batch reporting system that users had stopped reading.", metrics:['120k DAU at launch','p99 ingestion < 100ms','60fps chart rendering'], stack:['React','TypeScript','WebSockets','Node.js','PostgreSQL','Redis'] },
+];
+
+const SKILLS = {
+  'Frontend':  ['React','Next.js','TypeScript','Tailwind CSS','Framer Motion','CSS / HTML'],
+  'Backend':   ['Node.js','PostgreSQL','Prisma','Redis','REST','GraphQL','tRPC'],
+  'AI / ML':   ['OpenAI API','pgvector','LangChain','Vercel AI SDK','Embeddings','RAG pipelines'],
+  'Infra':     ['AWS','Docker','GitHub Actions','Vercel','Cloudflare','Terraform'],
+};
+
+/* ── Sections ──────────────────────────────────────────────── */
+
+function HeroSection({ onContact }) {
+  return (
+    <section className="section" style={{paddingTop:'80px',paddingBottom:'96px',minHeight:'calc(100vh - 60px)',display:'flex',alignItems:'center',position:'relative',overflow:'hidden'}}>
+      <div style={{position:'absolute',top:'-10%',left:'50%',transform:'translateX(-50%)',width:'900px',height:'700px',background:'radial-gradient(ellipse at 40% 40%, rgba(245,158,11,0.06) 0%, transparent 65%)',pointerEvents:'none'}} />
+      <div className="container" style={{position:'relative',zIndex:1}}>
+        <div style={{maxWidth:'680px'}}>
+          <div style={{marginBottom:'24px'}}><Badge variant="success" dot>Open to senior roles — June 2026</Badge></div>
+          <h1 style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:700,fontSize:'clamp(52px,7vw,72px)',lineHeight:1.1,letterSpacing:'-0.04em',color:'#FAFAFA',marginBottom:'20px'}}>Gary Hyde</h1>
+          <div style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:600,fontSize:'clamp(22px,3vw,30px)',color:'#F59E0B',letterSpacing:'-0.02em',lineHeight:1.2,marginBottom:'24px'}}>Senior Full-Stack Developer</div>
+          <p style={{fontSize:'18px',color:'#A1A1AA',lineHeight:'1.65',marginBottom:'40px',maxWidth:'540px'}}>10+ years shipping production web apps with React, Next.js, Node.js, and PostgreSQL. I own work end to end — from data model and API through to polished frontend.</p>
+          <div style={{display:'flex',gap:'12px',flexWrap:'wrap',marginBottom:'40px'}}>
+            <Button variant="primary" size="lg" href="#work">View my work</Button>
+            <Button variant="secondary" size="lg" onClick={onContact}>Get in touch</Button>
+          </div>
+          <div style={{display:'flex',gap:'8px',flexWrap:'wrap'}}>
+            {['React','Next.js','TypeScript','Node.js','PostgreSQL','OpenAI API'].map(t=><Tag key={t}>{t}</Tag>)}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProjectCard({ project }) {
+  const [open, setOpen] = React.useState(false);
+  const catColors = {'AI / Search':'accent','Platform':'info','Data':'success'};
+  return (
+    <Card hoverable onClick={()=>setOpen(o=>!o)} padding="lg">
+      <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:'16px',marginBottom:'16px'}}>
+        <Badge variant={catColors[project.category]||'neutral'} size="sm">{project.category}</Badge>
+        <Badge variant="success" size="sm">Shipped</Badge>
+      </div>
+      <div style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:600,fontSize:'18px',color:'#FAFAFA',letterSpacing:'-0.015em',marginBottom:'8px'}}>{project.title}</div>
+      <div style={{fontSize:'13px',color:'#71717A',marginBottom:'16px',lineHeight:'1.35'}}>{project.sub}</div>
+      {open && (
+        <div style={{borderTop:'1px solid rgba(255,255,255,0.08)',paddingTop:'16px',marginBottom:'16px'}}>
+          <p style={{fontSize:'13px',color:'#A1A1AA',lineHeight:'1.65',marginBottom:'16px'}}>{project.desc}</p>
+          <div style={{display:'flex',flexDirection:'column',gap:'6px',marginBottom:'16px'}}>
+            {project.metrics.map(m=>(
+              <div key={m} style={{display:'flex',alignItems:'center',gap:'8px',fontSize:'13px',color:'#A1A1AA'}}>
+                <span style={{color:'#F59E0B',fontSize:'12px',fontWeight:700}}>→</span>{m}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      <div style={{display:'flex',gap:'6px',flexWrap:'wrap',marginBottom:'16px'}}>
+        {project.stack.map(t=><Tag key={t} size="sm">{t}</Tag>)}
+      </div>
+      <div style={{fontSize:'11px',color:'#52525B',fontFamily:"'JetBrains Mono',monospace"}}>{open?'↑ Collapse':'↓ Expand case study'}</div>
+    </Card>
+  );
+}
+
+function WorkSection() {
+  return (
+    <section className="section" id="work" style={{borderTop:'1px solid rgba(255,255,255,0.08)'}}>
+      <div className="container">
+        <div className="section-label">SELECTED WORK</div>
+        <h2 className="section-heading">Things I've shipped</h2>
+        <p style={{fontSize:'18px',color:'#71717A',marginBottom:'48px',maxWidth:'480px',lineHeight:'1.65'}}>A few projects I'm proud of. Click any card for context and metrics.</p>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'20px'}}>
+          {PROJECTS.map(p=><ProjectCard key={p.id} project={p}/>)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function SkillsSection() {
+  return (
+    <section className="section" style={{background:'#111113',borderTop:'1px solid rgba(255,255,255,0.08)',borderBottom:'1px solid rgba(255,255,255,0.08)'}}>
+      <div className="container">
+        <div className="section-label">SKILLS</div>
+        <h2 className="section-heading">The stack</h2>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:'32px'}}>
+          {Object.entries(SKILLS).map(([group,tags])=>(
+            <div key={group}>
+              <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'11px',color:'#F59E0B',letterSpacing:'0.05em',marginBottom:'16px',fontWeight:500}}>{group}</div>
+              <div style={{display:'flex',flexDirection:'column',gap:'8px'}}>
+                {tags.map(t=><div key={t} style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'13px',color:'#A1A1AA',padding:'6px 0',borderBottom:'1px solid rgba(255,255,255,0.08)'}}>{t}</div>)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AboutSection() {
+  return (
+    <section className="section" id="about">
+      <div className="container">
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'80px',alignItems:'start'}}>
+          <div>
+            <div className="section-label">ABOUT</div>
+            <h2 className="section-heading">Who I am</h2>
+            <p style={{fontSize:'16px',color:'#A1A1AA',lineHeight:'1.65',marginBottom:'20px'}}>I'm a senior full-stack developer with 10+ years shipping production web apps. I've built search systems, API platforms, analytics dashboards, and AI-augmented tools — always end to end.</p>
+            <p style={{fontSize:'16px',color:'#A1A1AA',lineHeight:'1.65',marginBottom:'20px'}}>Over the last two years I've integrated AI throughout the stack — semantic search, content pipelines, and developer tooling that meaningfully speeds up iteration.</p>
+            <p style={{fontSize:'16px',color:'#A1A1AA',lineHeight:'1.65',marginBottom:'32px'}}>I work best on small, senior teams where I can own a meaningful surface. I care about production quality, fast feedback loops, and keeping the codebase approachable.</p>
+            <div style={{display:'flex',gap:'12px'}}>
+              <Button variant="secondary" href="https://github.com" size="sm">GitHub</Button>
+              <Button variant="secondary" href="https://linkedin.com" size="sm">LinkedIn</Button>
+              <Button variant="secondary" href="/cv.pdf" size="sm">Download CV</Button>
+            </div>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'16px'}}>
+            {[{n:'10+',label:'Years in production'},{n:'3',label:'Successful launches'},{n:'$6M+',label:'Revenue enabled'},{n:'99.9%',label:'Average uptime SLO'}].map(s=>(
+              <div key={s.n} style={{padding:'24px',background:'#111113',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'10px'}}>
+                <div style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:700,fontSize:'2.25rem',color:'#F59E0B',letterSpacing:'-0.03em',marginBottom:'8px'}}>{s.n}</div>
+                <div style={{fontSize:'13px',color:'#71717A',lineHeight:'1.35'}}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ContactSection() {
+  const [sent, setSent] = React.useState(false);
+  const [form, setForm] = React.useState({name:'',email:'',message:''});
+  const set = k => e => setForm(f=>({...f,[k]:e.target.value}));
+  const inputStyle = {width:'100%',height:'40px',padding:'0 16px',fontFamily:"'DM Sans',system-ui,sans-serif",fontSize:'13px',color:'#FAFAFA',backgroundColor:'#111113',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'6px',outline:'none'};
+  return (
+    <section className="section" id="contact" style={{borderTop:'1px solid rgba(255,255,255,0.08)'}}>
+      <div className="container">
+        <div style={{maxWidth:'560px'}}>
+          <div className="section-label">CONTACT</div>
+          <h2 className="section-heading">Get in touch</h2>
+          <p style={{fontSize:'18px',color:'#71717A',lineHeight:'1.65',marginBottom:'40px'}}>I'm currently open to senior full-stack and staff engineer roles. Drop me a message and I'll reply within one business day.</p>
+          {sent ? (
+            <div style={{padding:'32px',background:'rgba(34,197,94,0.12)',border:'1px solid rgba(34,197,94,0.25)',borderRadius:'10px',textAlign:'center'}}>
+              <div style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:600,fontSize:'20px',color:'#22C55E',marginBottom:'8px'}}>Message sent</div>
+              <div style={{fontSize:'13px',color:'#A1A1AA'}}>I'll be in touch within one business day.</div>
+            </div>
+          ) : (
+            <div style={{display:'flex',flexDirection:'column',gap:'16px'}}>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'16px'}}>
+                <div style={{display:'flex',flexDirection:'column',gap:'6px'}}>
+                  <label style={{fontSize:'13px',fontWeight:500,color:'#A1A1AA'}}>Your name</label>
+                  <input style={inputStyle} placeholder="Jane Smith" value={form.name} onChange={set('name')} />
+                </div>
+                <div style={{display:'flex',flexDirection:'column',gap:'6px'}}>
+                  <label style={{fontSize:'13px',fontWeight:500,color:'#A1A1AA'}}>Email</label>
+                  <input type="email" style={inputStyle} placeholder="jane@company.com" value={form.email} onChange={set('email')} />
+                </div>
+              </div>
+              <div style={{display:'flex',flexDirection:'column',gap:'6px'}}>
+                <label style={{fontSize:'13px',fontWeight:500,color:'#A1A1AA'}}>Message</label>
+                <textarea rows={4} style={{...inputStyle,height:'auto',padding:'12px 16px',resize:'vertical',lineHeight:'1.6'}} placeholder="Tell me what you're building and what you need..." value={form.message} onChange={set('message')} />
+              </div>
+              <div><Button variant="primary" size="lg" onClick={()=>setSent(true)}>Send message</Button></div>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer style={{borderTop:'1px solid rgba(255,255,255,0.08)',padding:'40px 0'}}>
+      <div className="container" style={{display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+        <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
+          <img src="../../assets/logo.svg" width={26} height={26} alt="GH" />
+          <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'11px',color:'#52525B'}}>Gary Hyde · Full-Stack Developer</span>
+        </div>
+        <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'11px',color:'#52525B'}}>{new Date().getFullYear()}</div>
+      </div>
+    </footer>
+  );
+}
+
+function App() {
+  const scrollTo = id => { const el = document.getElementById(id); if (el) window.scrollTo({top:el.offsetTop-70,behavior:'smooth'}); };
+  return <>
+    <NavBar
+      logo={<span style={{display:'flex',alignItems:'center',gap:'10px'}}><img src="../../assets/logo.svg" width={26} height={26} alt="GH" /><span style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:700,fontSize:'14px',letterSpacing:'-0.02em',color:'#FAFAFA'}}>Gary Hyde</span></span>}
+      links={[{label:'Work',href:'#work'},{label:'About',href:'#about'}]}
+      cta={<Button variant="primary" size="sm" onClick={()=>scrollTo('contact')}>Get in touch</Button>}
+      onLinkClick={(e,href)=>{e.preventDefault();const el=document.querySelector(href);if(el)window.scrollTo({top:el.offsetTop-70,behavior:'smooth'});}}
+    />
+    <main style={{paddingTop:'60px'}}>
+      <HeroSection onContact={()=>scrollTo('contact')} />
+      <WorkSection />
+      <SkillsSection />
+      <AboutSection />
+      <ContactSection />
+    </main>
+    <Footer />
+  </>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

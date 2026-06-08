@@ -1,0 +1,47 @@
+<!-- @dsCard group="Colors" viewport="700x200" name="Accent — Amber" subtitle="Primary brand accent: CTAs, links, interactive affordances" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { background: var(--bg); margin: 0; padding: 20px; font-family: var(--font-body); }
+  .row { display: flex; gap: 10px; }
+  .swatch {
+    flex: 1; height: 88px; border-radius: var(--radius-md);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 8px 10px; gap: 2px;
+  }
+  .swatch-name { font-family: var(--font-mono); font-size: 11px; opacity: 0.7; }
+  .swatch-hex  { font-family: var(--font-mono); font-size: 11px; font-weight: 600; }
+  .dark-text   { color: rgba(9,9,11,0.75); }
+  .dark-text .swatch-hex { color: #09090B; }
+  .light-text  { color: rgba(250,250,250,0.65); }
+  .light-text .swatch-hex { color: #FAFAFA; }
+</style>
+</head>
+<body>
+<div class="row">
+  <div class="swatch dark-text" style="background:var(--color-accent)">
+    <div class="swatch-name">--color-accent</div>
+    <div class="swatch-hex">#F59E0B</div>
+  </div>
+  <div class="swatch dark-text" style="background:var(--color-accent-light)">
+    <div class="swatch-name">--color-accent-light</div>
+    <div class="swatch-hex">#FCD34D</div>
+  </div>
+  <div class="swatch dark-text" style="background:var(--color-accent-dark)">
+    <div class="swatch-name">--color-accent-dark</div>
+    <div class="swatch-hex">#D97706</div>
+  </div>
+  <div class="swatch" style="background:var(--color-accent-muted); border: 1px solid var(--color-accent-border)">
+    <div class="swatch-name" style="color:var(--color-accent); opacity:0.8">--color-accent-muted</div>
+    <div class="swatch-hex" style="color:var(--color-accent)">12% alpha</div>
+  </div>
+  <div class="swatch" style="background:var(--surface-1); border: 1px solid var(--border)">
+    <div class="swatch-name" style="color:var(--text-3)">--color-accent-fg</div>
+    <div class="swatch-hex" style="color:var(--color-accent)">#09090B</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+/* ============================================================
+   Gary Hyde Design System — Global Entry Point
+   ============================================================
+   Import this one file. Do not add inline rules here.
+   Everything lives in the imported files below.
+   ============================================================ */
+
+@import './tokens/typography.css';
+@import './tokens/colors.css';
+@import './tokens/spacing.css';
+@import './tokens/motion.css';

@@ -1,0 +1,8 @@
+<svg viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg" fill="none">
+  
+  <rect width="40" height="40" rx="8" fill="#F59E0B"></rect>
+  <text x="20" y="28" text-anchor="middle" font-family="&#39;Space Grotesk&#39;, system-ui, sans-serif" font-weight="700" font-size="16" letter-spacing="-0.5" fill="#09090B">GH</text>
+  
+  <text x="52" y="17" font-family="&#39;Space Grotesk&#39;, system-ui, sans-serif" font-weight="700" font-size="13" letter-spacing="-0.2" fill="#FAFAFA">Gary Hyde</text>
+  <text x="52" y="30" font-family="&#39;DM Sans&#39;, system-ui, sans-serif" font-weight="400" font-size="10" letter-spacing="0.8" fill="#A1A1AA">FULL-STACK DEV</text>
+</svg>

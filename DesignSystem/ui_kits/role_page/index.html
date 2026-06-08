@@ -1,0 +1,333 @@
+<!-- @dsCard group="Portfolio" viewport="1280x900" name="Role Landing Page" subtitle="Per-role application page — hero, 90-day plan, experience, contact" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gary Hyde — Staff Engineer · Acme</title>
+<link rel="icon" href="../../assets/favicon.svg">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #09090B; color: #FAFAFA; font-family: 'DM Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .container { max-width: 1140px; margin: 0 auto; padding: 0 40px; }
+  .section { padding: 88px 0; }
+  .section-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #52525B; letter-spacing: 0.14em; margin-bottom: 20px; }
+  .section-heading { font-family: 'Space Grotesk', system-ui, sans-serif; font-size: 1.875rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; color: #FAFAFA; margin-bottom: 16px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+
+/* ── Inlined DS Components ─────────────────────────────────── */
+
+function Button({ children, variant='primary', size='md', disabled=false, href, leftIcon, rightIcon, onClick, fullWidth=false }) {
+  const [hov, setHov] = React.useState(false);
+  const [pressed, setPressed] = React.useState(false);
+  const base = { display:'inline-flex', alignItems:'center', justifyContent:'center', gap:'8px', fontFamily:"'DM Sans',system-ui,sans-serif", fontWeight:500, lineHeight:1, border:'1px solid transparent', cursor:disabled?'not-allowed':'pointer', opacity:disabled?0.45:1, textDecoration:'none', whiteSpace:'nowrap', WebkitFontSmoothing:'antialiased', transform:pressed&&!disabled?'scale(0.98)':'scale(1)', transition:'background-color 150ms ease, border-color 150ms ease, color 150ms ease', width:fullWidth?'100%':undefined };
+  const sizes = { sm:{padding:'0 12px',fontSize:'11px',borderRadius:'4px',height:'30px'}, md:{padding:'0 20px',fontSize:'13px',borderRadius:'6px',height:'38px'}, lg:{padding:'0 24px',fontSize:'16px',borderRadius:'6px',height:'46px'} };
+  const variants = {
+    primary:   { backgroundColor:hov&&!disabled?'#FCD34D':'#F59E0B', color:'#09090B', borderColor:'transparent' },
+    secondary: { backgroundColor:hov&&!disabled?'#1F1F23':'#18181B', color:hov?'#FAFAFA':'#A1A1AA', borderColor:hov?'rgba(255,255,255,0.16)':'rgba(255,255,255,0.08)' },
+    ghost:     { backgroundColor:hov&&!disabled?'rgba(255,255,255,0.06)':'transparent', color:hov?'#FAFAFA':'#A1A1AA', borderColor:'transparent' },
+    danger:    { backgroundColor:'rgba(239,68,68,0.12)', color:'#EF4444', borderColor:'rgba(239,68,68,0.25)' },
+  };
+  const style = {...base,...sizes[size],...variants[variant]};
+  const Tag = href ? 'a' : 'button';
+  return <Tag style={style} href={href} type={href?undefined:'button'} disabled={href?undefined:disabled} onClick={disabled?undefined:onClick} onMouseEnter={()=>setHov(true)} onMouseLeave={()=>{setHov(false);setPressed(false);}} onMouseDown={()=>setPressed(true)} onMouseUp={()=>setPressed(false)}>
+    {leftIcon && <span style={{display:'flex',alignItems:'center'}}>{leftIcon}</span>}
+    {children}
+    {rightIcon && <span style={{display:'flex',alignItems:'center'}}>{rightIcon}</span>}
+  </Tag>;
+}
+
+function Badge({ children, variant='neutral', size='md', dot=false }) {
+  const sizes = { sm:{padding:'2px 8px',fontSize:'10px'}, md:{padding:'3px 10px',fontSize:'11px'} };
+  const variants = {
+    neutral: { backgroundColor:'#1F1F23', color:'#A1A1AA', borderColor:'rgba(255,255,255,0.08)' },
+    accent:  { backgroundColor:'rgba(245,158,11,0.12)', color:'#F59E0B', borderColor:'rgba(245,158,11,0.25)' },
+    success: { backgroundColor:'rgba(34,197,94,0.12)', color:'#22C55E', borderColor:'rgba(34,197,94,0.25)' },
+    error:   { backgroundColor:'rgba(239,68,68,0.12)', color:'#EF4444', borderColor:'rgba(239,68,68,0.25)' },
+    warning: { backgroundColor:'rgba(245,158,11,0.12)', color:'#F59E0B', borderColor:'rgba(245,158,11,0.25)' },
+    info:    { backgroundColor:'rgba(59,130,246,0.12)', color:'#3B82F6', borderColor:'rgba(59,130,246,0.25)' },
+  };
+  const dotColors = { neutral:'#71717A', accent:'#F59E0B', success:'#22C55E', error:'#EF4444', warning:'#F59E0B', info:'#3B82F6' };
+  const style = { display:'inline-flex', alignItems:'center', gap:'6px', fontFamily:"'DM Sans',system-ui,sans-serif", fontWeight:500, lineHeight:1, borderRadius:'9999px', border:'1px solid', whiteSpace:'nowrap', ...sizes[size], ...variants[variant] };
+  return <span style={style}>{dot&&<span style={{width:'6px',height:'6px',borderRadius:'50%',backgroundColor:dotColors[variant],flexShrink:0}}/>}{children}</span>;
+}
+
+function Tag({ children, size='md', active=false }) {
+  const style = { display:'inline-flex', alignItems:'center', fontFamily:"'JetBrains Mono',monospace", lineHeight:1, borderRadius:'4px', border:'1px solid', whiteSpace:'nowrap',
+    ...(size==='sm'?{padding:'2px 7px',fontSize:'10px'}:{padding:'3px 9px',fontSize:'11px'}),
+    ...(active ? {backgroundColor:'rgba(245,158,11,0.12)',color:'#F59E0B',borderColor:'rgba(245,158,11,0.25)'} : {backgroundColor:'#111113',color:'#71717A',borderColor:'rgba(255,255,255,0.08)'}) };
+  return <span style={style}>{children}</span>;
+}
+
+function Card({ children, padding='md', hoverable=false, href, onClick, header, footer }) {
+  const [hov, setHov] = React.useState(false);
+  const interactive = hoverable || Boolean(href) || Boolean(onClick);
+  const pads = { none:'0', sm:'16px', md:'24px', lg:'32px' };
+  const style = { display:'flex', flexDirection:'column', backgroundColor:'#111113', border:'1px solid', borderColor:hov&&interactive?'rgba(255,255,255,0.16)':'rgba(255,255,255,0.08)', borderRadius:'10px', overflow:'hidden', cursor:interactive?'pointer':'default', textDecoration:'none', color:'inherit', transition:'border-color 150ms ease, transform 220ms ease, box-shadow 150ms ease', transform:hov&&interactive?'translateY(-2px)':'translateY(0)', boxShadow:hov&&interactive?'0 10px 20px rgba(0,0,0,0.5)':'none' };
+  const Tag = href ? 'a' : 'div';
+  return <Tag style={style} href={href} onMouseEnter={()=>setHov(true)} onMouseLeave={()=>setHov(false)} onClick={onClick}>
+    {header&&<div style={{padding:pads[padding],borderBottom:'1px solid rgba(255,255,255,0.08)',flexShrink:0}}>{header}</div>}
+    <div style={{padding:pads[padding],flex:1}}>{children}</div>
+    {footer&&<div style={{padding:`16px ${pads[padding]}`,borderTop:'1px solid rgba(255,255,255,0.08)',flexShrink:0}}>{footer}</div>}
+  </Tag>;
+}
+
+function NavBar({ logo, links=[], cta, onLinkClick }) {
+  const [scrolled, setScrolled] = React.useState(false);
+  React.useEffect(()=>{
+    const h = ()=>setScrolled(window.scrollY>12);
+    window.addEventListener('scroll',h,{passive:true});
+    return ()=>window.removeEventListener('scroll',h);
+  },[]);
+  return <nav style={{position:'fixed',top:0,left:0,right:0,height:'60px',zIndex:200,display:'flex',alignItems:'center',padding:'0 24px',backgroundColor:scrolled?'rgba(9,9,11,0.88)':'transparent',backdropFilter:scrolled?'blur(12px)':'none',WebkitBackdropFilter:scrolled?'blur(12px)':'none',borderBottom:scrolled?'1px solid rgba(255,255,255,0.08)':'1px solid transparent',transition:'background-color 220ms ease'}}>
+    <a href="/" style={{display:'flex',alignItems:'center',gap:'12px',textDecoration:'none',color:'#FAFAFA',flexShrink:0}}>{logo||'GH'}</a>
+    <div style={{display:'flex',alignItems:'center',gap:'4px',marginLeft:'auto',marginRight:cta?'16px':'0'}}>
+      {links.map(({label,href},i)=>(
+        <a key={i} href={href} onClick={onLinkClick?(e)=>onLinkClick(e,href):undefined} style={{display:'inline-flex',alignItems:'center',padding:'0 12px',height:'34px',fontSize:'13px',fontFamily:"'DM Sans',system-ui,sans-serif",color:'#71717A',textDecoration:'none',borderRadius:'4px',transition:'color 150ms ease'}}
+          onMouseEnter={e=>{e.currentTarget.style.color='#FAFAFA';e.currentTarget.style.background='rgba(255,255,255,0.04)';}}
+          onMouseLeave={e=>{e.currentTarget.style.color='#71717A';e.currentTarget.style.background='transparent';}}
+        >{label}</a>
+      ))}
+    </div>
+    {cta&&<div>{cta}</div>}
+  </nav>;
+}
+
+/* ── Role config — swap per application ──────────────────────*/
+const ROLE = {
+  company: 'Acme',
+  title: 'Staff Engineer',
+  team: 'Platform',
+  tagline: "I've spent the last four years shipping exactly this kind of infrastructure. Here's what I'd build for your team in the first 90 days.",
+  relevantStack: ['Next.js','TypeScript','Node.js','PostgreSQL','Redis','AWS','OpenAI API'],
+};
+
+const BUILDS = [
+  { week:'Days 1–30', title:'Understand the system', items:["Audit the existing API and data model — identify the three biggest reliability risks","Shadow on-call for one rotation; read the last six months of incident reports","Ship one small but meaningful fix within the first week to build trust"] },
+  { week:'Days 31–60', title:'Ship the first real thing', items:["Propose and build the highest-leverage improvement found in the audit","Add observability where it's missing — structured logging, p95 latency metrics","Document the deployment process so any engineer can ship safely"] },
+  { week:'Days 61–90', title:'Compound the gains', items:["Drive a technical decision with the team — write an RFC, facilitate the discussion","Deliver the first AI-augmented capability if the roadmap supports it","Establish a regular production metrics review with the team"] },
+];
+
+const EXPERIENCE = [
+  { period:'2022–2025', role:'Senior Full-Stack Engineer', company:'Fintech startup (Series B)', highlights:['Rebuilt core API from monolith to service-oriented — cut p99 from 1.2s to 80ms','Led a 3-person team delivering $2.4M ARR API platform in 7 months','Introduced AI-augmented search; reduced support ticket volume by 34%'], stack:['Next.js','Node.js','PostgreSQL','AWS','TypeScript'] },
+  { period:'2019–2022', role:'Full-Stack Engineer', company:'SaaS company (Series A)', highlights:['Sole engineer on real-time analytics product serving 120k DAU at launch','Reduced cloud spend by $180k/year through query and caching optimisation','Mentored two junior engineers; both shipped production features within a month'], stack:['React','Node.js','PostgreSQL','Redis','TypeScript'] },
+];
+
+const WHY = [
+  { label:'End-to-end ownership', body:"I don't hand off at the API boundary. I own the data model, the API, and the UI — which means I find problems earlier and fix them faster." },
+  { label:'AI in the stack, not on top', body:"I integrate AI where it earns its place — semantic search, intelligent triage, code generation — not as a demo, but as production-grade features with real metrics." },
+  { label:'Production-first instincts', body:"I've been on-call. I write systems I'd want to debug at 3am: observable, well-tested, with clear runbooks." },
+];
+
+/* ── Sections ──────────────────────────────────────────────── */
+
+function HeroSection() {
+  const scrollTo = id => { const el=document.getElementById(id); if(el) window.scrollTo({top:el.offsetTop-70,behavior:'smooth'}); };
+  return (
+    <section className="section" style={{paddingTop:'120px',paddingBottom:'80px',position:'relative',overflow:'hidden'}}>
+      <div style={{position:'absolute',top:0,right:0,width:'600px',height:'500px',background:'radial-gradient(ellipse at 80% 20%, rgba(245,158,11,0.07) 0%, transparent 60%)',pointerEvents:'none'}} />
+      <div className="container" style={{position:'relative'}}>
+        <div style={{display:'flex',alignItems:'center',gap:'12px',marginBottom:'32px',flexWrap:'wrap'}}>
+          <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'11px',color:'#52525B',letterSpacing:'0.08em'}}>A page made specifically for</span>
+          <div style={{display:'inline-flex',alignItems:'center',gap:'8px',padding:'6px 12px',background:'#111113',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'9999px'}}>
+            <span style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:700,fontSize:'13px',color:'#FAFAFA'}}>{ROLE.company}</span>
+          </div>
+          <Badge variant="accent">{ROLE.title} · {ROLE.team}</Badge>
+        </div>
+        <h1 style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:700,fontSize:'clamp(32px,5vw,60px)',lineHeight:1.1,letterSpacing:'-0.035em',color:'#FAFAFA',marginBottom:'24px',maxWidth:'840px'}}>
+          What I'd build for your <span style={{color:'#F59E0B'}}>platform team</span> in 90 days
+        </h1>
+        <p style={{fontSize:'18px',color:'#A1A1AA',lineHeight:'1.65',maxWidth:'620px',marginBottom:'40px'}}>{ROLE.tagline}</p>
+        <div style={{display:'flex',gap:'16px',flexWrap:'wrap',marginBottom:'40px'}}>
+          <Button variant="primary" size="lg" onClick={()=>scrollTo('build')}>See the 90-day plan</Button>
+          <Button variant="secondary" size="lg" onClick={()=>scrollTo('contact')}>Get in touch</Button>
+          <Button variant="ghost" size="lg" href="#">Download CV →</Button>
+        </div>
+        <div style={{display:'flex',flexWrap:'wrap',gap:'8px',alignItems:'center'}}>
+          <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'11px',color:'#52525B',marginRight:'4px'}}>Relevant stack:</span>
+          {ROLE.relevantStack.map(t=><Tag key={t} size="sm">{t}</Tag>)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function BuildSection() {
+  return (
+    <section className="section" id="build" style={{background:'#111113',borderTop:'1px solid rgba(255,255,255,0.08)',borderBottom:'1px solid rgba(255,255,255,0.08)'}}>
+      <div className="container">
+        <div className="section-label">90-DAY PLAN</div>
+        <h2 className="section-heading">What I'd build and how I'd do it</h2>
+        <p style={{fontSize:'16px',color:'#71717A',lineHeight:'1.65',maxWidth:'540px',marginBottom:'48px'}}>Specific, not vague. Based on what I know about your stack and team size.</p>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'20px'}}>
+          {BUILDS.map(b=>(
+            <Card key={b.week} padding="lg">
+              <div style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'11px',color:'#F59E0B',letterSpacing:'0.05em',marginBottom:'12px',fontWeight:500}}>{b.week}</div>
+              <div style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:600,fontSize:'18px',color:'#FAFAFA',marginBottom:'20px',letterSpacing:'-0.01em'}}>{b.title}</div>
+              <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
+                {b.items.map((item,j)=>(
+                  <div key={j} style={{display:'flex',gap:'10px',alignItems:'flex-start'}}>
+                    <span style={{color:'#F59E0B',fontWeight:700,flexShrink:0,marginTop:'2px',fontSize:'12px'}}>→</span>
+                    <span style={{fontSize:'13px',color:'#A1A1AA',lineHeight:'1.65'}}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ExperienceSection() {
+  return (
+    <section className="section" id="experience">
+      <div className="container">
+        <div className="section-label">EXPERIENCE</div>
+        <h2 className="section-heading">Where I've done this before</h2>
+        <div style={{display:'flex',flexDirection:'column',gap:'20px'}}>
+          {EXPERIENCE.map(e=>(
+            <Card key={e.period} padding="lg">
+              <div style={{display:'flex',alignItems:'baseline',justifyContent:'space-between',gap:'16px',marginBottom:'16px',flexWrap:'wrap'}}>
+                <div>
+                  <div style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:600,fontSize:'18px',color:'#FAFAFA',letterSpacing:'-0.01em'}}>{e.role}</div>
+                  <div style={{fontSize:'13px',color:'#71717A',marginTop:'4px'}}>{e.company}</div>
+                </div>
+                <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'11px',color:'#52525B'}}>{e.period}</span>
+              </div>
+              <div style={{display:'flex',flexDirection:'column',gap:'8px',marginBottom:'20px'}}>
+                {e.highlights.map((h,i)=>(
+                  <div key={i} style={{display:'flex',gap:'10px',alignItems:'flex-start'}}>
+                    <span style={{color:'#22C55E',flexShrink:0,marginTop:'2px',fontSize:'12px',fontWeight:700}}>✓</span>
+                    <span style={{fontSize:'13px',color:'#A1A1AA',lineHeight:'1.65'}}>{h}</span>
+                  </div>
+                ))}
+              </div>
+              <div style={{display:'flex',gap:'6px',flexWrap:'wrap'}}>
+                {e.stack.map(t=><Tag key={t} size="sm">{t}</Tag>)}
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhySection() {
+  return (
+    <section className="section" style={{background:'#111113',borderTop:'1px solid rgba(255,255,255,0.08)',borderBottom:'1px solid rgba(255,255,255,0.08)'}}>
+      <div className="container">
+        <div className="section-label">WHY ME</div>
+        <h2 className="section-heading">What I bring that's harder to hire for</h2>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'20px'}}>
+          {WHY.map(w=>(
+            <div key={w.label} style={{padding:'24px',borderLeft:'2px solid #F59E0B'}}>
+              <div style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:600,fontSize:'16px',color:'#FAFAFA',marginBottom:'12px',letterSpacing:'-0.01em'}}>{w.label}</div>
+              <p style={{fontSize:'13px',color:'#A1A1AA',lineHeight:'1.65'}}>{w.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ContactSection() {
+  const [sent, setSent] = React.useState(false);
+  const inputStyle = {width:'100%',height:'40px',padding:'0 16px',fontFamily:"'DM Sans',system-ui,sans-serif",fontSize:'13px',color:'#FAFAFA',backgroundColor:'#18181B',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'6px',outline:'none'};
+  return (
+    <section className="section" id="contact">
+      <div className="container">
+        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'80px',alignItems:'start'}}>
+          <div>
+            <div className="section-label">GET IN TOUCH</div>
+            <h2 className="section-heading" style={{fontSize:'2.25rem'}}>Let's talk about the role</h2>
+            <p style={{fontSize:'16px',color:'#71717A',lineHeight:'1.65',marginBottom:'32px'}}>I'm genuinely interested in what your team is building. Happy to jump on a call, answer technical questions, or do a whiteboard session.</p>
+            <div style={{display:'flex',flexDirection:'column',gap:'12px'}}>
+              {[{label:'Email',val:'gary@garyhyde.dev'},{label:'GitHub',val:'github.com/garyhyde'},{label:'LinkedIn',val:'linkedin.com/in/garyhyde'}].map(l=>(
+                <div key={l.label} style={{display:'flex',gap:'12px',alignItems:'center',padding:'16px',background:'#111113',border:'1px solid rgba(255,255,255,0.08)',borderRadius:'6px'}}>
+                  <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'11px',color:'#52525B',width:'60px',flexShrink:0}}>{l.label}</span>
+                  <span style={{fontSize:'13px',color:'#F59E0B',fontFamily:"'JetBrains Mono',monospace"}}>{l.val}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            {sent ? (
+              <div style={{padding:'40px',background:'rgba(34,197,94,0.12)',border:'1px solid rgba(34,197,94,0.25)',borderRadius:'10px',textAlign:'center'}}>
+                <div style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:600,fontSize:'22px',color:'#22C55E',marginBottom:'12px'}}>Message sent</div>
+                <div style={{fontSize:'13px',color:'#A1A1AA'}}>I'll reply within one business day.</div>
+              </div>
+            ) : (
+              <Card padding="lg">
+                <div style={{display:'flex',flexDirection:'column',gap:'16px'}}>
+                  <div style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:600,fontSize:'16px',color:'#FAFAFA',marginBottom:'4px'}}>Send a message</div>
+                  <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'12px'}}>
+                    <input placeholder="Your name" style={inputStyle} />
+                    <input placeholder="Email address" style={inputStyle} />
+                  </div>
+                  <textarea rows={4} placeholder={`What's the role? What's the hardest problem on the ${ROLE.team} team right now?`} style={{...inputStyle,height:'auto',padding:'12px 16px',resize:'vertical',lineHeight:'1.6'}} />
+                  <Button variant="primary" size="md" fullWidth onClick={()=>setSent(true)}>Send message</Button>
+                </div>
+              </Card>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer style={{borderTop:'1px solid rgba(255,255,255,0.08)',padding:'32px 0'}}>
+      <div className="container" style={{display:'flex',alignItems:'center',justifyContent:'space-between',flexWrap:'wrap',gap:'16px'}}>
+        <div style={{display:'flex',alignItems:'center',gap:'12px'}}>
+          <img src="../../assets/logo.svg" width={22} height={22} alt="GH" />
+          <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'11px',color:'#52525B'}}>Made specifically for {ROLE.company} · Gary Hyde</span>
+        </div>
+        <Button variant="ghost" size="sm" href="/">← Back to portfolio</Button>
+      </div>
+    </footer>
+  );
+}
+
+function App() {
+  const scrollTo = id => { const el=document.getElementById(id); if(el) window.scrollTo({top:el.offsetTop-70,behavior:'smooth'}); };
+  return <>
+    <NavBar
+      logo={<span style={{display:'flex',alignItems:'center',gap:'10px'}}>
+        <img src="../../assets/logo.svg" width={24} height={24} alt="GH" />
+        <span style={{fontFamily:"'Space Grotesk',system-ui,sans-serif",fontWeight:700,fontSize:'14px',color:'#FAFAFA',letterSpacing:'-0.02em'}}>Gary Hyde</span>
+        <span style={{fontFamily:"'JetBrains Mono',monospace",fontSize:'11px',color:'#52525B',paddingLeft:'10px',borderLeft:'1px solid rgba(255,255,255,0.08)'}}>for {ROLE.company}</span>
+      </span>}
+      links={[{label:'90-day plan',href:'#build'},{label:'Experience',href:'#experience'},{label:'Contact',href:'#contact'}]}
+      cta={<Button variant="primary" size="sm" onClick={()=>scrollTo('contact')}>Get in touch</Button>}
+      onLinkClick={(e,href)=>{e.preventDefault();const el=document.querySelector(href);if(el)window.scrollTo({top:el.offsetTop-70,behavior:'smooth'});}}
+    />
+    <main style={{paddingTop:'60px'}}>
+      <HeroSection />
+      <BuildSection />
+      <ExperienceSection />
+      <WhySection />
+      <ContactSection />
+    </main>
+    <Footer />
+  </>;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

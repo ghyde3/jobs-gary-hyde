@@ -1,0 +1,44 @@
+<!-- @dsCard group="Spacing" viewport="700x240" name="Radius & Shadow" subtitle="Border radii none → full, plus shadow ramp" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { background: var(--bg); margin: 0; padding: 18px 24px; font-family: var(--font-body); }
+  .section-label { font-family: var(--font-mono); font-size: 10px; color: var(--text-4); margin-bottom: 10px; }
+  .radii { display: flex; gap: 10px; align-items: flex-end; margin-bottom: 18px; }
+  .r-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .r-box  { width: 44px; height: 44px; background: var(--surface-2); border: 1px solid var(--border-strong); }
+  .r-val  { font-family: var(--font-mono); font-size: 9.5px; color: var(--text-3); text-align: center; }
+  .shadows { display: flex; gap: 10px; }
+  .s-item { flex: 1; height: 44px; background: var(--surface-1); display: flex; align-items: center; justify-content: center; border-radius: var(--radius-md); }
+  .s-label { font-family: var(--font-mono); font-size: 9.5px; color: var(--text-3); }
+</style>
+</head>
+<body>
+<div class="section-label">BORDER RADIUS</div>
+<div class="radii">
+  <div class="r-item"><div class="r-box" style="border-radius:0"></div><div class="r-val">none<br>0</div></div>
+  <div class="r-item"><div class="r-box" style="border-radius:2px"></div><div class="r-val">xs<br>2px</div></div>
+  <div class="r-item"><div class="r-box" style="border-radius:4px"></div><div class="r-val">sm<br>4px</div></div>
+  <div class="r-item"><div class="r-box" style="border-radius:6px"></div><div class="r-val">md<br>6px</div></div>
+  <div class="r-item"><div class="r-box" style="border-radius:10px"></div><div class="r-val">lg<br>10px</div></div>
+  <div class="r-item"><div class="r-box" style="border-radius:14px"></div><div class="r-val">xl<br>14px</div></div>
+  <div class="r-item"><div class="r-box" style="border-radius:20px"></div><div class="r-val">2xl<br>20px</div></div>
+  <div class="r-item"><div class="r-box" style="border-radius:28px"></div><div class="r-val">3xl<br>28px</div></div>
+  <div class="r-item"><div class="r-box" style="border-radius:9999px"></div><div class="r-val">full<br>∞</div></div>
+</div>
+<div class="section-label">SHADOWS</div>
+<div class="shadows">
+  <div class="s-item" style="box-shadow:none; border:1px solid var(--border)"><span class="s-label">none</span></div>
+  <div class="s-item" style="box-shadow:var(--shadow-xs)"><span class="s-label">xs</span></div>
+  <div class="s-item" style="box-shadow:var(--shadow-sm)"><span class="s-label">sm</span></div>
+  <div class="s-item" style="box-shadow:var(--shadow-md)"><span class="s-label">md</span></div>
+  <div class="s-item" style="box-shadow:var(--shadow-lg)"><span class="s-label">lg</span></div>
+  <div class="s-item" style="box-shadow:var(--shadow-xl)"><span class="s-label">xl</span></div>
+  <div class="s-item" style="box-shadow:var(--shadow-accent); border:1px solid var(--border-accent)"><span class="s-label" style="color:var(--color-accent)">accent</span></div>
+  <div class="s-item" style="box-shadow:var(--shadow-focus)"><span class="s-label" style="color:var(--color-accent)">focus</span></div>
+</div>
+</body>
+</html>

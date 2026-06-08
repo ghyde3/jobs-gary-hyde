@@ -1,0 +1,33 @@
+<!-- @dsCard group="Type" viewport="700x380" name="Type Scale" subtitle="Full size ramp xs → 7xl, both families" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { background: var(--bg); margin: 0; padding: 16px 24px; }
+  .row {
+    display: flex; align-items: baseline; gap: 12px;
+    padding: 5px 0; border-bottom: 1px solid var(--border);
+  }
+  .row:last-child { border-bottom: none; }
+  .label { font-family: var(--font-mono); font-size: 10px; color: var(--text-4); width: 52px; flex-shrink: 0; }
+  .px    { font-family: var(--font-mono); font-size: 10px; color: var(--text-4); width: 34px; flex-shrink: 0; }
+  .sample-d { font-family: var(--font-display); color: var(--text-1); font-weight: var(--weight-semibold); line-height: 1; flex: 1; white-space: nowrap; overflow: hidden; }
+  .sample-b { font-family: var(--font-body); color: var(--text-2); line-height: 1; }
+</style>
+</head>
+<body>
+  <div class="row"><span class="label">--text-7xl</span><span class="px">72px</span><span class="sample-d" style="font-size:var(--text-7xl)">Aa</span><span class="sample-b" style="font-size:var(--text-7xl)">Aa</span></div>
+  <div class="row"><span class="label">--text-6xl</span><span class="px">60px</span><span class="sample-d" style="font-size:var(--text-6xl)">Aa</span><span class="sample-b" style="font-size:var(--text-6xl)">Aa</span></div>
+  <div class="row"><span class="label">--text-5xl</span><span class="px">48px</span><span class="sample-d" style="font-size:var(--text-5xl)">Senior Developer</span></div>
+  <div class="row"><span class="label">--text-4xl</span><span class="px">36px</span><span class="sample-d" style="font-size:var(--text-4xl)">Selected Work</span></div>
+  <div class="row"><span class="label">--text-3xl</span><span class="px">30px</span><span class="sample-d" style="font-size:var(--text-3xl)">What I'd build for your team</span></div>
+  <div class="row"><span class="label">--text-2xl</span><span class="px">24px</span><span class="sample-d" style="font-size:var(--text-2xl)">Full-stack, end to end</span></div>
+  <div class="row"><span class="label">--text-xl</span><span class="px">20px</span><span class="sample-b" style="font-size:var(--text-xl);color:var(--text-1)">React · Next.js · Node.js · PostgreSQL</span></div>
+  <div class="row"><span class="label">--text-lg</span><span class="px">18px</span><span class="sample-b" style="font-size:var(--text-lg);color:var(--text-1)">10+ years shipping production web apps</span></div>
+  <div class="row"><span class="label">--text-base</span><span class="px">16px</span><span class="sample-b" style="font-size:var(--text-base);color:var(--text-2)">Body copy and UI text at the default reading size</span></div>
+  <div class="row"><span class="label">--text-sm</span><span class="px">13px</span><span class="sample-b" style="font-size:var(--text-sm);color:var(--text-2)">Button labels, captions, secondary information</span></div>
+  <div class="row"><span class="label">--text-xs</span><span class="px">11px</span><span class="sample-b" style="font-size:var(--text-xs);color:var(--text-3)">METADATA · LABELS · TOKEN NAMES · TIMESTAMPS</span></div>
+</body>
+</html>

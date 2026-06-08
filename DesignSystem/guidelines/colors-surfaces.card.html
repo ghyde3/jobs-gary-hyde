@@ -1,0 +1,55 @@
+<!-- @dsCard group="Colors" viewport="700x190" name="Surfaces & Borders" subtitle="Dark-mode elevation: bg → surface-1 → surface-2 → surface-3" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { background: #050507; margin: 0; padding: 20px; font-family: var(--font-body); }
+  .row { display: flex; gap: 8px; margin-bottom: 10px; }
+  .surface {
+    flex: 1; height: 72px; border-radius: var(--radius-md);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 8px 10px; gap: 2px;
+  }
+  .borders { display: flex; gap: 8px; }
+  .border-chip {
+    flex: 1; height: 28px; border-radius: var(--radius-sm);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .label { font-family: var(--font-mono); font-size: 10px; color: var(--text-3); }
+  .val   { font-family: var(--font-mono); font-size: 10px; color: var(--text-2); font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="row">
+  <div class="surface" style="background:#09090B">
+    <div class="label">--bg</div><div class="val">#09090B</div>
+  </div>
+  <div class="surface" style="background:#111113">
+    <div class="label">--surface-1</div><div class="val">#111113</div>
+  </div>
+  <div class="surface" style="background:#18181B">
+    <div class="label">--surface-2</div><div class="val">#18181B</div>
+  </div>
+  <div class="surface" style="background:#1F1F23">
+    <div class="label">--surface-3</div><div class="val">#1F1F23</div>
+  </div>
+  <div class="surface" style="background:rgba(255,255,255,0.04)">
+    <div class="label">--surface-hover</div><div class="val">4% white</div>
+  </div>
+</div>
+<div class="borders">
+  <div class="border-chip" style="border: 1px solid rgba(255,255,255,0.08); background:var(--surface-1)">
+    <span class="label">--border (8%)</span>
+  </div>
+  <div class="border-chip" style="border: 1px solid rgba(255,255,255,0.16); background:var(--surface-1)">
+    <span class="label">--border-strong (16%)</span>
+  </div>
+  <div class="border-chip" style="border: 1px solid rgba(245,158,11,0.25); background:var(--surface-1)">
+    <span class="label" style="color:var(--color-accent)">--border-accent (25%)</span>
+  </div>
+</div>
+</body>
+</html>

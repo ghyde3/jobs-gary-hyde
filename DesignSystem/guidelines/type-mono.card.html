@@ -1,0 +1,41 @@
+<!-- @dsCard group="Type" viewport="700x200" name="Mono — JetBrains Mono" subtitle="Code blocks, technical labels, inline code — JetBrains Mono" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  body { background: var(--bg); margin: 0; padding: 20px 24px; }
+  .block {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: var(--radius-md); padding: 14px 16px;
+    font-family: var(--font-mono); font-size: var(--text-sm);
+    line-height: var(--leading-relaxed); margin-bottom: 10px;
+  }
+  .kw   { color: var(--code-keyword); }
+  .fn   { color: var(--code-fn); }
+  .str  { color: var(--code-string); }
+  .num  { color: var(--code-number); }
+  .cm   { color: var(--code-comment); }
+  .ty   { color: var(--code-type); }
+  .tx   { color: var(--text-2); }
+  .meta { font-family: var(--font-mono); font-size: 10px; color: var(--text-4); display: flex; gap: 14px; }
+</style>
+</head>
+<body>
+<div class="block">
+  <span class="kw">const</span> <span class="fn">deploy</span> <span class="tx">= async (</span><span class="ty">env</span><span class="tx">:</span> <span class="ty">string</span><span class="tx">) => {</span><br>
+  <span class="tx">&nbsp;&nbsp;</span><span class="kw">const</span> <span class="tx">result =</span> <span class="kw">await</span> <span class="fn">pipeline</span><span class="tx">.</span><span class="fn">run</span><span class="tx">({ env, </span><span class="str">'ai-augmented'</span><span class="tx">: </span><span class="kw">true</span><span class="tx"> })</span><br>
+  <span class="tx">&nbsp;&nbsp;</span><span class="cm">// ships to production in under 60s</span><br>
+  <span class="tx">&nbsp;&nbsp;</span><span class="kw">return</span> <span class="tx">result.</span><span class="fn">latencyP95</span><span class="tx"> &lt;</span> <span class="num">200</span><br>
+  <span class="tx">}</span>
+</div>
+<div class="meta">
+  <span>JetBrains Mono</span>
+  <span>400 · 500 · 700</span>
+  <span>italic 400</span>
+  <span>13px default</span>
+  <span>leading 1.65</span>
+</div>
+</body>
+</html>
