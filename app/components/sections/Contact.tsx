@@ -67,8 +67,26 @@ export function Contact() {
     <section
       className="section"
       id="contact"
-      style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        background: '#111113',
+        borderTop: '1px solid rgba(255,255,255,0.08)',
+        borderBottom: '1px solid rgba(255,255,255,0.08)',
+      }}
     >
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '-25%',
+          right: '6%',
+          width: '720px',
+          height: '520px',
+          background:
+            'radial-gradient(ellipse at 60% 60%, rgba(245,158,11,0.05) 0%, transparent 65%)',
+          pointerEvents: 'none',
+        }}
+      />
       <style>{`
         .contact-name-email {
           display: grid;
@@ -84,7 +102,7 @@ export function Contact() {
           border-color: rgba(255,255,255,0.24);
         }
       `}</style>
-      <div className="container">
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '560px' }}>
           <div className="section-label">CONTACT</div>
           <h2 className="section-heading">Get in touch</h2>

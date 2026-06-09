@@ -166,6 +166,89 @@ export const STATS: Stat[] = [
   { n: 'AI-native', label: 'Cursor + Claude Code workflow' },
 ];
 
+export interface Model {
+  name: string;
+  maker: string;
+  tag: string;
+  take: string;
+}
+
+// Honest, first-person takes on the models I keep in rotation. Edit freely.
+export const MODELS: Model[] = [
+  {
+    name: 'Claude',
+    maker: 'Anthropic',
+    tag: 'Coding + agentic',
+    take: 'The model I trust most for real code and long agentic work. It holds a large codebase in context, sticks to a plan, and is the engine behind most of my day-to-day building in Claude Code.',
+  },
+  {
+    name: 'ChatGPT',
+    maker: 'OpenAI',
+    tag: 'General reasoning',
+    take: 'My quick second opinion. I reach for it to rubber-duck a design, draft copy, or reason through a tradeoff before I commit to an approach.',
+  },
+  {
+    name: 'Grok',
+    maker: 'xAI',
+    tag: 'Fast + current',
+    take: 'Good when I want a fast answer with a current view of the web. I use it for speed and recency rather than deep deliberation.',
+  },
+  {
+    name: 'Kimi',
+    maker: 'Moonshot',
+    tag: 'Long context',
+    take: 'My pick when a task needs a huge context window and a strong agentic researcher. It works through large document sets and multi-step research without losing the thread.',
+  },
+  {
+    name: 'Nemotron',
+    maker: 'NVIDIA',
+    tag: 'Open weight',
+    take: 'An open-weight model I have tested for reasoning work. Useful when I want a capable model I can run on my own terms instead of behind a closed API.',
+  },
+  {
+    name: 'Ollama',
+    maker: 'Local runtime',
+    tag: 'Local + private',
+    take: 'How I run models locally when a task should never leave my machine. Great for private codebases, offline work, and cheap iteration with no API bill.',
+  },
+  {
+    name: 'Composer',
+    maker: 'Cursor',
+    tag: 'In-editor agent',
+    take: "Cursor's in-editor agent. I use it for fast, in-context edits while I am already in the flow, where staying inside the editor beats switching tools.",
+  },
+];
+
+export interface Note {
+  title: string;
+  blurb: string;
+  tags: string[];
+}
+
+// Short notes on how I think about AI-assisted development. Edit freely.
+export const NOTES: Note[] = [
+  {
+    title: 'gstack and agent-first workflows',
+    blurb: "Garry Tan's gstack reframes the coding agent as a workflow, not a chat box. Skills for planning, review, QA, and ship turn one-off prompts into a repeatable pipeline. The leverage is in the process around the model, not just the model.",
+    tags: ['Workflow', 'Agents'],
+  },
+  {
+    title: 'Superpowers: skills as reusable expertise',
+    blurb: "Obra's Superpowers packages real engineering discipline (test-driven development, systematic debugging, planning) into skills the agent invokes on its own. It is the difference between an agent that guesses and one that follows a method.",
+    tags: ['Skills', 'Discipline'],
+  },
+  {
+    title: 'Harness engineering',
+    blurb: 'Most of the quality in AI-assisted work comes from the harness: the tools, verification steps, and context discipline wrapped around the model. I spend as much time building that harness as I do prompting. The model is the engine, the harness is the car.',
+    tags: ['Tooling', 'Quality'],
+  },
+  {
+    title: 'Loops and routines',
+    blurb: 'Loops and scheduled routines let an agent keep making progress between my check-ins: watching a deploy, sweeping for bugs, iterating until it hits a target. Used with care, they turn a one-shot tool into something that works while I focus elsewhere.',
+    tags: ['Automation', 'Agents'],
+  },
+];
+
 export const LINKS: Links = {
   email: 'Gary.Robert.Hyde@gmail.com',
   github: '',

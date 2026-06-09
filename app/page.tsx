@@ -4,6 +4,8 @@ import { Button } from './components/Button';
 import { Hero } from './components/sections/Hero';
 import { Work } from './components/sections/Work';
 import { Skills } from './components/sections/Skills';
+import { Models } from './components/sections/Models';
+import { Notes } from './components/sections/Notes';
 import { About } from './components/sections/About';
 import { Contact } from './components/sections/Contact';
 import { Footer } from './components/sections/Footer';
@@ -30,6 +32,8 @@ export default function Home() {
         }
         links={[
           { label: 'Work', href: '#work' },
+          { label: 'Models', href: '#models' },
+          { label: 'Notes', href: '#notes' },
           { label: 'About', href: '#about' },
           { label: 'Contact', href: '#contact' },
         ]}
@@ -43,6 +47,8 @@ export default function Home() {
         <Hero />
         <Work />
         <Skills />
+        <Models />
+        <Notes />
         <About />
         <Contact />
       </main>
