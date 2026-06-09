@@ -8,8 +8,10 @@ export async function sendContact(data: {
   name: string;
   email: string;
   message: string;
+  company?: string;
+  role?: string;
 }): Promise<{ ok: boolean; error?: string }> {
-  const { name, email, message } = data;
+  const { name, email, message, company, role } = data;
 
   if (!name || !name.trim()) {
     return { ok: false, error: 'Please enter your name.' };
@@ -25,17 +27,18 @@ export async function sendContact(data: {
     return { ok: false, error: 'Please enter a message.' };
   }
 
+  const roleTag =
+    company && role ? ` [${company}/${role}]` : '';
+
   try {
     const { error } = await resend.emails.send({
       from: process.env.CONTACT_FROM || 'Gary Hyde Portfolio <onboarding@resend.dev>',
       to: process.env.CONTACT_TO || 'Gary.Robert.Hyde@gmail.com',
       replyTo: email.trim(),
-      subject: `New portfolio message from ${name.trim()}`,
-      text: `Name: ${name.trim()}\nEmail: ${email.trim()}\n\nMessage:\n${message.trim()}`,
+      subject: `New portfolio message from ${name.trim()}${roleTag}`,
+      text: `Name: ${name.trim()}\nEmail: ${email.trim()}${roleTag ? `\nRole page: ${company}/${role}` : ''}\n\nMessage:\n${message.trim()}`,
     });
 
-    // The Resend SDK resolves with an { error } payload instead of throwing,
-    // so a failed send still reaches here. Treat it as a failure.
     if (error) {
       console.error('Resend send failed:', error);
       return {
