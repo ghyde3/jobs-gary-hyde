@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { FileText, Mail } from 'lucide-react';
 import { Card } from '../Card';
 import { Divider } from '../Divider';
 import { Button } from '../Button';
@@ -95,16 +96,15 @@ export function RoleSection({ role }: RoleSectionProps) {
 
   const bookingUrl = role.bookingUrl ?? BOOKING_URL;
   const mailto = `mailto:${LINKS.email}`;
+  const noteParagraphs = Array.isArray(role.note) ? role.note : [role.note];
 
   return (
     <section
-      className="section"
       id="role"
       style={{
         position: 'relative',
         overflow: 'hidden',
         background: '#111113',
-        borderTop: '1px solid rgba(255,255,255,0.08)',
         borderBottom: '1px solid rgba(255,255,255,0.08)',
       }}
     >
@@ -139,29 +139,61 @@ export function RoleSection({ role }: RoleSectionProps) {
         @media (max-width: 640px) {
           .req-grid { grid-template-columns: 1fr; }
           .contact-name-email-role { grid-template-columns: 1fr; }
+          .material-cards { flex-direction: column !important; }
         }
         .role-contact-input:focus {
           border-color: rgba(255,255,255,0.24);
         }
+        .material-card {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          padding: 20px 24px;
+          background: #111113;
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 10px;
+          text-decoration: none;
+          color: inherit;
+          flex: 1;
+          transition: border-color 150ms ease, background-color 150ms ease;
+          cursor: pointer;
+        }
+        .material-card:hover {
+          border-color: rgba(255,255,255,0.18);
+          background: #18181B;
+        }
+        /* Full-bleed work bands - mirror Work.tsx */
+        .role-work-bands {
+          display: flex;
+          flex-direction: column;
+        }
+        .role-work-bands > .band {
+          border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .role-work-bands > .band:last-child {
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
       `}</style>
 
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-
-        {/* Note */}
+      {/* Note - cover letter intro, bleeds into hero */}
+      <div className="section container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="section-label">BUILT FOR YOU</div>
-        <p
-          style={{
-            fontSize: '18px',
-            color: '#A1A1AA',
-            lineHeight: '1.65',
-            maxWidth: '640px',
-            marginBottom: '48px',
-          }}
-        >
-          {role.note}
-        </p>
+        {noteParagraphs.map((para, i) => (
+          <p
+            key={i}
+            style={{
+              fontSize: '18px',
+              color: '#A1A1AA',
+              lineHeight: '1.65',
+              maxWidth: '640px',
+              marginBottom: i < noteParagraphs.length - 1 ? '20px' : '48px',
+            }}
+          >
+            {para}
+          </p>
+        ))}
 
-        <Divider label="REQUIREMENT TO PROOF" spacing="sm" />
+        <Divider label="WHY I FIT THIS ROLE" spacing="sm" />
 
         {/* Requirement-proof pairs */}
         <div
@@ -177,11 +209,11 @@ export function RoleSection({ role }: RoleSectionProps) {
             <Card key={i} padding="md">
               <div className="req-grid">
                 <div>
-                  <div className="req-col-label">REQUIREMENT</div>
+                  <div className="req-col-label">THE ROLE ASKS FOR</div>
                   <div className="req-text">{rp.requirement}</div>
                 </div>
                 <div>
-                  <div className="req-col-label">PROOF</div>
+                  <div className="req-col-label">MY EXPERIENCE</div>
                   <div className="req-proof">{rp.proof}</div>
                 </div>
               </div>
@@ -189,7 +221,7 @@ export function RoleSection({ role }: RoleSectionProps) {
           ))}
         </div>
 
-        {/* Curated projects */}
+        {/* Curated projects - header + breadth note inside container */}
         {curatedProjects.length > 0 && (
           <>
             <Divider label="SELECTED WORK" spacing="sm" />
@@ -201,37 +233,31 @@ export function RoleSection({ role }: RoleSectionProps) {
                   color: '#71717A',
                   lineHeight: '1.65',
                   marginTop: '24px',
-                  marginBottom: '32px',
+                  marginBottom: '0',
                   maxWidth: '600px',
                 }}
               >
                 {role.breadthNote}
               </p>
             )}
-
-            <div
-              className="work-bands"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                marginTop: role.breadthNote ? '0' : '24px',
-                marginBottom: '48px',
-                border: '1px solid rgba(255,255,255,0.08)',
-                borderRadius: '10px',
-                overflow: 'hidden',
-              }}
-            >
-              {curatedProjects.map(({ project, framing }, i) => {
-                const displayProject = framing ? { ...project, sub: framing } : project;
-                return (
-                  <ProjectCard key={project.id} project={displayProject} index={i} />
-                );
-              })}
-            </div>
           </>
         )}
+      </div>
 
-        {/* Conversion block */}
+      {/* Full-bleed work bands - outside container, mirroring Work.tsx */}
+      {curatedProjects.length > 0 && (
+        <div id="work" className="role-work-bands" style={{ position: 'relative', zIndex: 1, marginTop: role.breadthNote ? '32px' : '24px', marginBottom: '0' }}>
+          {curatedProjects.map(({ project, framing }, i) => {
+            const displayProject = framing ? { ...project, sub: framing } : project;
+            return (
+              <ProjectCard key={project.id} project={displayProject} index={i} />
+            );
+          })}
+        </div>
+      )}
+
+      {/* Conversion block */}
+      <div className="section container" style={{ position: 'relative', zIndex: 1 }}>
         <Divider label="NEXT STEP" spacing="sm" />
 
         <div style={{ marginTop: '40px' }}>
@@ -267,8 +293,8 @@ export function RoleSection({ role }: RoleSectionProps) {
 
           <Divider spacing="sm" />
 
-          {/* PDF downloads */}
-          <div style={{ marginBottom: '32px' }}>
+          {/* Download cards */}
+          <div id="materials" style={{ marginBottom: '32px' }}>
             <div
               style={{
                 fontFamily: 'var(--font-display)',
@@ -292,13 +318,33 @@ export function RoleSection({ role }: RoleSectionProps) {
             >
               Both documents are tailored to this role.
             </p>
-            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-              <Button variant="secondary" size="md" href={role.artifacts.resumePdf}>
-                Download resume
-              </Button>
-              <Button variant="secondary" size="md" href={role.artifacts.coverLetterPdf}>
-                Download cover letter
-              </Button>
+            <div className="material-cards" style={{ display: 'flex', gap: '16px', maxWidth: '560px' }}>
+              <a href={role.artifacts.resumePdf} className="material-card">
+                <span style={{ color: '#F59E0B', display: 'flex', flexShrink: 0 }}>
+                  <FileText size={24} />
+                </span>
+                <span>
+                  <span style={{ display: 'block', fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '15px', color: '#FAFAFA', marginBottom: '4px' }}>
+                    Resume
+                  </span>
+                  <span style={{ display: 'block', fontSize: '13px', color: '#71717A' }}>
+                    Tailored for this role
+                  </span>
+                </span>
+              </a>
+              <a href={role.artifacts.coverLetterPdf} className="material-card">
+                <span style={{ color: '#F59E0B', display: 'flex', flexShrink: 0 }}>
+                  <Mail size={24} />
+                </span>
+                <span>
+                  <span style={{ display: 'block', fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '15px', color: '#FAFAFA', marginBottom: '4px' }}>
+                    Cover letter
+                  </span>
+                  <span style={{ display: 'block', fontSize: '13px', color: '#71717A' }}>
+                    Written for this role
+                  </span>
+                </span>
+              </a>
             </div>
           </div>
 
