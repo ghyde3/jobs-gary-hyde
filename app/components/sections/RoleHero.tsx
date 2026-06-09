@@ -7,11 +7,9 @@ import { PROFILE } from '../../data/profile';
 interface RoleHeroProps {
   headline: string;
   subhead: string;
-  companyName: string;
-  roleTitle: string;
 }
 
-export function RoleHero({ headline, subhead, companyName, roleTitle }: RoleHeroProps) {
+export function RoleHero({ headline, subhead }: RoleHeroProps) {
   return (
     <section
       className="section"
@@ -29,12 +27,9 @@ export function RoleHero({ headline, subhead, companyName, roleTitle }: RoleHero
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '680px' }}>
-          <div style={{ marginBottom: '24px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          <div style={{ marginBottom: '24px' }}>
             <Badge variant="success" dot>
               {PROFILE.badge}
-            </Badge>
-            <Badge variant="neutral">
-              {roleTitle} at {companyName}
             </Badge>
           </div>
 

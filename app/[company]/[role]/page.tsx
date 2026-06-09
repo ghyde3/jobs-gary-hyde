@@ -64,8 +64,14 @@ export default async function RolePage({
   }
 
   // NavBar accepts logo (ReactNode), links (optional, defaults []), cta (optional).
-  // Role pages show branding only: no nav links, no CTA.
   // The logo prop is the same JSX used on the homepage.
+  const navLinks = [
+    { label: 'Why I fit', href: '#role' },
+    { label: 'Selected work', href: '#work' },
+    { label: 'Materials', href: '#materials' },
+    { label: 'Contact', href: '#contact' },
+  ];
+
   const logoNode = (
     <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
       <img src="/logo.svg" width={26} height={26} alt="GH" />
@@ -85,13 +91,11 @@ export default async function RolePage({
 
   return (
     <>
-      <NavBar logo={logoNode} />
+      <NavBar logo={logoNode} links={navLinks} />
       <main style={{ paddingTop: '60px' }}>
         <RoleHero
           headline={data.hero.headline}
           subhead={data.hero.subhead}
-          companyName={data.companyName}
-          roleTitle={data.roleTitle}
         />
         <RoleSection role={data} />
         <Skills />
