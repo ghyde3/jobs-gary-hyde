@@ -23,6 +23,11 @@ export interface Links {
   linkedin: string;
 }
 
+export interface Photo {
+  src: string;
+  alt: string;
+}
+
 export const PROFILE = {
   name: 'Gary Hyde',
   title: 'Senior Full-Stack Developer',
@@ -247,6 +252,25 @@ export const NOTES: Note[] = [
     blurb: 'Loops and scheduled routines let an agent keep making progress between my check-ins: watching a deploy, sweeping for bugs, iterating until it hits a target. Used with care, they turn a one-shot tool into something that works while I focus elsewhere.',
     tags: ['Automation', 'Agents'],
   },
+];
+
+export const PHOTOS: Photo[] = [
+  { src: '/photo/gary-01.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-02.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-03.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-04.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-05.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-06.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-07.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-08.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-09.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-10.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-11.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-12.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-13.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-14.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-15.jpg', alt: 'Gary Hyde' },
+  { src: '/photo/gary-16.jpg', alt: 'Gary Hyde' },
 ];
 
 export const LINKS: Links = {

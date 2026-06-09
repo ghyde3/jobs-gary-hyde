@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '../Button';
 import { STATS, LINKS } from '../../data/profile';
 import { SectionTexture } from '../SectionTexture';
+import { PhotoSlider } from './PhotoSlider';
 
 export function About() {
   const mailto = `mailto:${LINKS.email}`;
@@ -24,15 +25,29 @@ export function About() {
           gap: 80px;
           align-items: start;
         }
-        .stats-grid {
+        .about-slider {
+          display: flex;
+          justify-content: flex-start;
+        }
+        .stats-row {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(4, 1fr);
           gap: 16px;
+          margin-top: 64px;
         }
         @media (max-width: 768px) {
           .about-grid {
             grid-template-columns: 1fr;
             gap: 48px;
+          }
+          .stats-row {
+            grid-template-columns: 1fr 1fr;
+            margin-top: 48px;
+          }
+        }
+        @media (max-width: 480px) {
+          .stats-row {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>
@@ -102,41 +117,45 @@ export function About() {
             </div>
           </div>
 
-          <div className="stats-grid">
-            {STATS.map((stat) => (
+          <div className="about-slider">
+            <PhotoSlider />
+          </div>
+        </div>
+
+        <div className="stats-row">
+          {STATS.map((stat) => (
+            <div
+              key={stat.n}
+              style={{
+                padding: '24px',
+                background: '#111113',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: '10px',
+              }}
+            >
               <div
-                key={stat.n}
                 style={{
-                  padding: '24px',
-                  background: '#111113',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  borderRadius: '10px',
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 700,
+                  fontSize: '2.25rem',
+                  color: '#F59E0B',
+                  letterSpacing: '-0.03em',
+                  marginBottom: '8px',
                 }}
               >
-                <div
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 700,
-                    fontSize: '2.25rem',
-                    color: '#F59E0B',
-                    letterSpacing: '-0.03em',
-                    marginBottom: '8px',
-                  }}
-                >
-                  {stat.n}
-                </div>
-                <div
-                  style={{
-                    fontSize: '13px',
-                    color: '#71717A',
-                    lineHeight: '1.35',
-                  }}
-                >
-                  {stat.label}
-                </div>
+                {stat.n}
               </div>
-            ))}
-          </div>
+              <div
+                style={{
+                  fontSize: '13px',
+                  color: '#71717A',
+                  lineHeight: '1.35',
+                }}
+              >
+                {stat.label}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
