@@ -1,5 +1,3 @@
-import type { Project } from '../profile';
-
 export interface RequirementProof {
   requirement: string;
   proof: string;
@@ -13,9 +11,9 @@ export interface CuratedProject {
 }
 
 export interface RoleArtifacts {
-  /** Path relative to public/, e.g. "/roles/vercel/ui-engineer/resume.pdf" */
+  /** URL path served from public/, e.g. "/roles/vercel/ui-engineer/resume.pdf" */
   resumePdf: string;
-  /** Path relative to public/, e.g. "/roles/vercel/ui-engineer/cover-letter.pdf" */
+  /** URL path served from public/, e.g. "/roles/vercel/ui-engineer/cover-letter.pdf" */
   coverLetterPdf: string;
 }
 
