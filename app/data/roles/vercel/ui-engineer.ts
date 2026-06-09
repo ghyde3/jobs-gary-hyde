@@ -17,12 +17,23 @@ export const vercelUiEngineer: RoleData = {
       'I build on Next.js and TypeScript every day, deploy to Vercel for every project, and care about the same things your product org cares about: fast cold starts, composable components, and a frontend that earns trust.',
   },
 
-  note:
-    'I have been following Vercel closely since the Zeit days and the move to Next.js 13 App Router. ' +
-    'Every project in my current portfolio runs on Next.js and deploys to Vercel, which means I ' +
-    'already live in the same stack your UI team works in. I am applying for the UI Engineer role ' +
-    'because I want to work on tooling that shapes how other engineers build, and I think my ' +
-    'end-to-end ownership style fits the way Vercel builds.',
+  note: [
+    'I have been following Vercel closely since the Zeit days, and the move to Next.js 13 App ' +
+    'Router cemented something I already believed: the best developer tools are built by people ' +
+    'who ship on them every day. Every project in my current portfolio runs on Next.js and ' +
+    'deploys to Vercel. That is not a talking point, it is just how I work.',
+
+    'The skills listed below are the same ones I use in production. I shipped four Next.js ' +
+    'applications using the App Router, worked with Server Components and streaming in real ' +
+    'products, and built a design system from tokens up to documented component patterns. ' +
+    'I am comfortable owning a feature from design input through to the Vercel deploy, and I ' +
+    'have done exactly that on every project I have shipped.',
+
+    'What I want to own at Vercel is the part of the product that other engineers see first. ' +
+    'The component primitives, the dashboard interactions, the pieces that set the quality bar ' +
+    'for everything downstream. I think my end-to-end ownership habit and my investment in ' +
+    'design-system craft fit the way Vercel builds, and I would like the chance to prove that.',
+  ],
 
   requirements: [
     {
@@ -86,9 +97,10 @@ export const vercelUiEngineer: RoleData = {
   ],
 
   breadthNote:
-    'Beyond these projects I have shipped 200+ production WordPress and WooCommerce sites for ' +
-    'clients over a 10-year agency and freelance run. That depth is not what makes me right for ' +
-    'this role, but the habit of shipping production code at volume is.',
+    'I started shipping client websites in 2010, while still in college, and built over 100 ' +
+    'production sites on WordPress and WooCommerce through an agency and freelance run. ' +
+    'That volume is not what makes me right for this role, but the habit of shipping ' +
+    'production code at scale is.',
 
   artifacts: {
     resumePdf: '/roles/vercel/ui-engineer/resume.pdf',

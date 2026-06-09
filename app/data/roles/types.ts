@@ -36,8 +36,11 @@ export interface RoleData {
     /** Supporting line displayed beneath the headline */
     subhead: string;
   };
-  /** Short first-person paragraph naming the company and role. No em-dashes. */
-  note: string;
+  /**
+   * Cover-letter style introduction naming the company and role.
+   * Use an array for multiple paragraphs. No em-dashes.
+   */
+  note: string | string[];
   /**
    * Ordered list of requirement-to-proof pairs. Author 3 to 6 pairs.
    * requirement: lifted or paraphrased from the job post.
