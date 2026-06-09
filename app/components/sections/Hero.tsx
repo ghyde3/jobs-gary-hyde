@@ -2,6 +2,7 @@ import React from 'react';
 import { Badge } from '../Badge';
 import { Button } from '../Button';
 import { Tag } from '../Tag';
+import { HeroMesh } from './HeroMesh';
 import { PROFILE, heroTags } from '../../data/profile';
 
 export function Hero() {
@@ -18,20 +19,7 @@ export function Hero() {
         overflow: 'hidden',
       }}
     >
-      {/* Faint hero radial background */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '-10%',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '900px',
-          height: '700px',
-          background:
-            'radial-gradient(ellipse at 40% 40%, rgba(245,158,11,0.06) 0%, transparent 65%)',
-          pointerEvents: 'none',
-        }}
-      />
+      <HeroMesh />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '680px' }}>

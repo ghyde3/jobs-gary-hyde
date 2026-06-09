@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '../Button';
 import { STATS, LINKS } from '../../data/profile';
+import { SectionTexture } from '../SectionTexture';
 
 export function About() {
   const mailto = `mailto:${LINKS.email}`;
@@ -9,8 +10,13 @@ export function About() {
     <section
       className="section"
       id="about"
-      style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        borderTop: '1px solid rgba(255,255,255,0.08)',
+      }}
     >
+      <SectionTexture variant="radial" corner="bottom-left" size="lg" intensity={0.055} />
       <style>{`
         .about-grid {
           display: grid;
@@ -30,7 +36,7 @@ export function About() {
           }
         }
       `}</style>
-      <div className="container">
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="about-grid">
           <div>
             <div className="section-label">ABOUT</div>

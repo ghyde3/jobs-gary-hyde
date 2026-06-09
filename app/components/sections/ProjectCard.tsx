@@ -3,7 +3,6 @@
 import React from 'react';
 import Image from 'next/image';
 import { Badge } from '../Badge';
-import { Card } from '../Card';
 import { Tag } from '../Tag';
 import type { Project } from '../../data/profile';
 
@@ -30,6 +29,9 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   const imageRight = index % 2 === 1;
   const previewUrl = project.liveUrl ?? project.repoUrl;
   const hasFooterLink = Boolean(project.liveUrl || project.repoUrl);
+  // Alternating "whisper" tint between bands.
+  const bandBg = index % 2 === 0 ? '#09090B' : '#0d0d10';
+  const indexLabel = String(index + 1).padStart(2, '0');
 
   const mediaInner = hasImage ? (
     <Image
@@ -45,7 +47,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
   const media = hasImage ? (
     previewUrl ? (
       <a
-        className="pcard__media"
+        className="band__media"
         href={previewUrl}
         target="_blank"
         rel="noopener noreferrer"
@@ -54,48 +56,93 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         {mediaInner}
       </a>
     ) : (
-      <div className="pcard__media">{mediaInner}</div>
+      <div className="band__media">{mediaInner}</div>
     )
   ) : null;
 
   return (
-    <Card padding="none">
+    <div
+      className={`band${hasImage ? ' band--split' : ''}${
+        hasImage && imageRight ? ' band--rev' : ''
+      }`}
+      style={{ background: bandBg }}
+    >
       <style>{`
-        .pcard { display: grid; grid-template-columns: 1fr; }
-        .pcard--split { grid-template-columns: 1.05fr 1fr; }
-        .pcard--rev .pcard__media { order: 2; }
-        .pcard--rev .pcard__body { order: 1; }
-        .pcard__media {
+        /* Gutter that lines the text up with the page container. */
+        .band {
+          --band-gutter: max(40px, calc((100vw - var(--container-xl)) / 2));
+          position: relative;
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+        .band--split { grid-template-columns: 1fr 1fr; }
+        .band--rev .band__media { order: 2; }
+        .band--rev .band__body { order: 1; }
+
+        /* Media bleeds to the viewport edge on its side. */
+        .band__media {
           position: relative;
           display: block;
-          min-height: 320px;
+          min-height: 420px;
           background: #0c0c0e;
-          border-right: 1px solid rgba(255,255,255,0.08);
+          overflow: hidden;
         }
-        .pcard--rev .pcard__media { border-right: none; border-left: 1px solid rgba(255,255,255,0.08); }
-        .pcard__body { padding: 36px; }
+
+        /* Body holds text to the container gutter so it lines up with the heading. */
+        .band__body {
+          position: relative;
+          padding: 64px var(--band-gutter) 64px 64px;
+        }
+        .band--rev .band__body {
+          padding: 64px 64px 64px var(--band-gutter);
+        }
+
+        /* Large monospace index watermark, kept subtle and behind the content. */
+        .band__index {
+          position: absolute;
+          top: 24px;
+          right: 28px;
+          font-family: var(--font-mono);
+          font-size: 120px;
+          font-weight: 700;
+          line-height: 1;
+          color: rgba(39, 39, 42, 0.5);
+          letter-spacing: -0.04em;
+          pointer-events: none;
+          user-select: none;
+          z-index: 0;
+        }
+        .band--rev .band__index { right: auto; left: 28px; }
+        .band__content { position: relative; z-index: 1; }
+
+        @media (max-width: 1280px) {
+          .band__body { padding-right: 40px; }
+          .band--rev .band__body { padding-left: 40px; }
+        }
         @media (max-width: 820px) {
-          .pcard--split { grid-template-columns: 1fr; }
-          .pcard__media {
+          .band--split { grid-template-columns: 1fr; }
+          .band__media {
             min-height: 0;
             aspect-ratio: 16 / 10;
-            border-right: none;
-            border-left: none;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
             order: 0 !important;
           }
-          .pcard__body { order: 1 !important; padding: 28px; }
+          .band__body {
+            order: 1 !important;
+            padding: 40px var(--band-gutter) !important;
+          }
+          .band__index { font-size: 88px; top: 16px; right: 20px; }
+          .band--rev .band__index { left: 20px; }
         }
       `}</style>
 
-      <div
-        className={`pcard${hasImage ? ' pcard--split' : ''}${
-          hasImage && imageRight ? ' pcard--rev' : ''
-        }`}
-      >
-        {media}
+      <span className="band__index" aria-hidden="true">
+        {indexLabel}
+      </span>
 
-        <div className="pcard__body">
+      {media}
+
+      <div className="band__body">
+        <div className="band__content">
           <div
             style={{
               display: 'flex',
@@ -251,6 +298,6 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           )}
         </div>
       </div>
-    </Card>
+    </div>
   );
 }

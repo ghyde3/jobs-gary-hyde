@@ -2,6 +2,7 @@ import React from 'react';
 import { NOTES } from '../../data/profile';
 import { Card } from '../Card';
 import { Tag } from '../Tag';
+import { SectionTexture } from '../SectionTexture';
 
 export function Notes() {
   return (
@@ -9,11 +10,14 @@ export function Notes() {
       className="section"
       id="notes"
       style={{
+        position: 'relative',
+        overflow: 'hidden',
         background: '#111113',
         borderTop: '1px solid rgba(255,255,255,0.08)',
         borderBottom: '1px solid rgba(255,255,255,0.08)',
       }}
     >
+      <SectionTexture variant="dots" />
       <style>{`
         .notes-grid {
           display: grid;
@@ -24,7 +28,7 @@ export function Notes() {
           .notes-grid { grid-template-columns: 1fr; }
         }
       `}</style>
-      <div className="container">
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="section-label">NOTES</div>
         <h2 className="section-heading">On AI-assisted development</h2>
         <p

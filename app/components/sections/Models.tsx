@@ -2,14 +2,20 @@ import React from 'react';
 import { MODELS } from '../../data/profile';
 import { Card } from '../Card';
 import { Badge } from '../Badge';
+import { SectionTexture } from '../SectionTexture';
 
 export function Models() {
   return (
     <section
       className="section"
       id="models"
-      style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        borderTop: '1px solid rgba(255,255,255,0.08)',
+      }}
     >
+      <SectionTexture variant="radial" corner="top-right" size="md" intensity={0.05} />
       <style>{`
         .models-grid {
           display: grid;
@@ -23,7 +29,7 @@ export function Models() {
           .models-grid { grid-template-columns: 1fr; }
         }
       `}</style>
-      <div className="container">
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="section-label">MODELS</div>
         <h2 className="section-heading">Models I have tested</h2>
         <p

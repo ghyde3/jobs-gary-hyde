@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Button } from '../Button';
 import { LINKS } from '../../data/profile';
 import { sendContact } from '../../actions';
+import { SectionTexture } from '../SectionTexture';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -75,6 +76,7 @@ export function Contact() {
         borderBottom: '1px solid rgba(255,255,255,0.08)',
       }}
     >
+      <SectionTexture variant="lines" />
       <div
         style={{
           position: 'absolute',

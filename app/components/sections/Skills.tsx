@@ -1,16 +1,20 @@
 import React from 'react';
 import { SKILLS } from '../../data/profile';
+import { SectionTexture } from '../SectionTexture';
 
 export function Skills() {
   return (
     <section
       className="section"
       style={{
+        position: 'relative',
+        overflow: 'hidden',
         background: '#111113',
         borderTop: '1px solid rgba(255,255,255,0.08)',
         borderBottom: '1px solid rgba(255,255,255,0.08)',
       }}
     >
+      <SectionTexture variant="iso" />
       <style>{`
         .skills-grid {
           display: grid;
@@ -29,7 +33,7 @@ export function Skills() {
           }
         }
       `}</style>
-      <div className="container">
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="section-label">SKILLS</div>
         <h2 className="section-heading">The stack</h2>
         <div className="skills-grid">
