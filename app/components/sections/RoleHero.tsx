@@ -1,7 +1,7 @@
 import React from 'react';
 import { Badge } from '../Badge';
 import { Button } from '../Button';
-import { HeroMesh } from './HeroMesh';
+import { HeroDots } from './HeroDots';
 import { PROFILE } from '../../data/profile';
 
 interface RoleHeroProps {
@@ -23,7 +23,7 @@ export function RoleHero({ headline, subhead }: RoleHeroProps) {
         overflow: 'hidden',
       }}
     >
-      <HeroMesh />
+      <HeroDots />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '680px' }}>
