@@ -12,7 +12,7 @@
 
 **Working notes for every task:**
 - House rules: no em-dashes anywhere, no emoji, sentence case labels, stay on design tokens (zinc-950, amber `#F59E0B`, `--font-mono`).
-- Env vars already set in `.env`: `CLAUDE_API_KEY`, `UPSTASH_REDIS_REST_TOKEN`. `UPSTASH_REDIS_REST_URL` is MISSING, add it from the Upstash dashboard before Task 6 QA. Code must not crash without it.
+- Env vars already set in `.env`: `ANTHROPIC_API_KEY`, `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`. Code must still not crash if the Upstash vars are absent (degraded mode per the spec).
 - Never commit `.env`. Run `npm run build` before any push.
 
 ---
@@ -722,7 +722,7 @@ import { checkLimits, dayKey, PER_VISITOR_DAILY } from '../../lib/ratelimit';
 export const runtime = 'nodejs';
 
 const COOKIE = 'gaq';
-const SECRET = process.env.CLAUDE_API_KEY ?? 'dev-secret';
+const SECRET = process.env.ANTHROPIC_API_KEY ?? 'dev-secret';
 
 function sign(payload: string): string {
   return createHmac('sha256', SECRET).update(payload).digest('hex').slice(0, 16);
@@ -777,7 +777,7 @@ export async function POST(req: NextRequest) {
 
   const setCookie = cookieHeader(day, cookieCount + 1);
 
-  const client = new Anthropic({ apiKey: process.env.CLAUDE_API_KEY });
+  const client = new Anthropic(); // reads ANTHROPIC_API_KEY from the environment
   const stream = client.messages.stream(
     {
       model: 'claude-opus-4-8',
@@ -843,7 +843,7 @@ curl -s -X POST localhost:3000/api/ask -H 'Content-Type: application/json' -d '{
 curl -s -X POST localhost:3000/api/ask -H 'Content-Type: application/json' -d "{\"question\":\"$(printf 'x%.0s' {1..300})\"}" -w '\n%{http_code}\n'
 ```
 
-Expected: first returns a short plain-text answer mentioning React or Next.js; second returns `ask me something first.` with 400; third returns the length error with 400. If the first call errors, check `CLAUDE_API_KEY` and whether `UPSTASH_REDIS_REST_URL` is set (missing URL should log the fail-open warning, not error).
+Expected: first returns a short plain-text answer mentioning React or Next.js; second returns `ask me something first.` with 400; third returns the length error with 400. If the first call errors, check that `ANTHROPIC_API_KEY` is set in `.env`.
 
 - [ ] **Step 4: Commit**
 
@@ -1495,10 +1495,10 @@ git commit -m "Rework hero to dot field + terminal split, drop HeroMesh"
 
 **Files:** none (verification only)
 
-- [ ] **Step 1: Confirm UPSTASH_REDIS_REST_URL is set**
+- [ ] **Step 1: Confirm the env is complete**
 
-Run: `grep -c UPSTASH_REDIS_REST_URL .env`
-Expected: `1`. If `0`, get the URL from the Upstash dashboard, add it to `.env` AND the Vercel project env, then continue.
+Run: `grep -c -e ANTHROPIC_API_KEY -e UPSTASH_REDIS_REST_URL -e UPSTASH_REDIS_REST_TOKEN .env`
+Expected: `3`. Also confirm all three are mirrored in the Vercel project env before any deploy.
 
 - [ ] **Step 2: Run the QA checklist in the browser**
 
