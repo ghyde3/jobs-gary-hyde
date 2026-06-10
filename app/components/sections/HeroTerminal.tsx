@@ -18,7 +18,7 @@ const CHIPS = [
   { label: 'sudo hire gary', cmd: 'sudo hire gary' },
 ];
 const BOOT_HINT = 'try: pitch 60, fit, or ask why should we hire gary?';
-const BOOT_DELAY_MS = 2500;
+const BOOT_DELAY_MS = 100;
 const TYPE_MS = 8;
 
 type Mode = 'shell' | 'ai';
