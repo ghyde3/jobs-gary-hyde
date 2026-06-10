@@ -104,4 +104,13 @@ a {
   .heroTermChips {
     display: flex;
   }
+  .termMaxBtn {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroTerminal * {
+    transition: none !important;
+  }
 }

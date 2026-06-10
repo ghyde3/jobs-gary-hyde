@@ -59,6 +59,8 @@ export const EGG_MATRIX_LINES = ['wake up, neo... (10 seconds)'];
 
 export const AI_BANNER = "gary-ai interactive. ask anything about gary. type 'exit' to leave.";
 
+export const WIN_RED_LINE = "this terminal stays open. gary needs the work.";
+
 export const AI_GOODBYE = 'gary-ai session ended. back at the shell.';
 
 export const BUSY_LINE = 'one question at a time, please.';

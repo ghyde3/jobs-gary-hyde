@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { resolveCommand, completions, type CommandResult } from '../../lib/terminal';
-import { BUSY_LINE, OFFLINE_LINES, AI_BANNER, AI_GOODBYE } from '../../data/terminal';
+import { BUSY_LINE, OFFLINE_LINES, AI_BANNER, AI_GOODBYE, WIN_RED_LINE } from '../../data/terminal';
 import { type HistoryItem } from '../../lib/ask';
 import { pulseDots } from './HeroDots';
 
@@ -21,6 +21,17 @@ const BOOT_HINT = 'try: pitch 60, fit, or ask why should we hire gary?';
 const BOOT_DELAY_MS = 100;
 const TYPE_MS = 8;
 
+// Traffic-light colors: muted, low-saturation, comfortable on zinc-950.
+const DOT_RED    = '#b85450';
+const DOT_YELLOW = '#b8954f';
+const DOT_GREEN  = '#4f8f5e';
+
+// Focus ring shared style
+const FOCUS_RING: React.CSSProperties = {
+  outline: '2px solid #F59E0B',
+  outlineOffset: '2px',
+};
+
 type Mode = 'shell' | 'ai';
 type Props = { boot?: string };
 
@@ -28,6 +39,7 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
   const [lines, setLines] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
   const [mode, setMode] = useState<Mode>('shell');
+  const [maximized, setMaximized] = useState(false);
   const outRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const userActed = useRef(false);
@@ -50,6 +62,26 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
   useEffect(() => {
     outRef.current?.scrollTo({ top: outRef.current.scrollHeight });
   }, [lines]);
+
+  // Lock body scroll while maximized; release on unmount or restore.
+  useEffect(() => {
+    if (maximized) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [maximized]);
+
+  // Escape key restores maximized state.
+  useEffect(() => {
+    if (!maximized) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMaximized(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [maximized]);
 
   const push = (...ls: string[]) =>
     setLines((prev) => [...prev, ...ls].slice(-MAX_SCROLLBACK));
@@ -255,18 +287,88 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
 
   const promptLabel = mode === 'ai' ? 'ai>' : '$';
 
+  // Window-control handlers
+  const onRedDot = () => {
+    markActed();
+    push(WIN_RED_LINE);
+  };
+  const onYellowDot = () => {
+    markActed();
+    setMaximized(false); // no-op when already default
+  };
+  const onGreenDot = () => {
+    markActed();
+    setMaximized((v) => !v);
+  };
+
+  // The terminal chrome is rendered once; its positioning changes based on maximized.
+  const wrapStyle: React.CSSProperties = maximized
+    ? {
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '90vw',
+        height: '85vh',
+        zIndex: 300,
+        display: 'flex',
+        flexDirection: 'column',
+        background: 'rgba(18,18,20,0.98)',
+        border: '1px solid rgba(255,255,255,0.13)',
+        borderRadius: '10px',
+        overflow: 'hidden',
+        backdropFilter: 'blur(4px)',
+        transition: 'all 200ms ease-out',
+      }
+    : {
+        background: 'rgba(24,24,27,0.88)',
+        border: '1px solid rgba(255,255,255,0.1)',
+        borderRadius: '10px',
+        overflow: 'hidden',
+        backdropFilter: 'blur(2px)',
+        transition: 'all 200ms ease-out',
+      };
+
+  const outputStyle: React.CSSProperties = maximized
+    ? {
+        fontFamily: 'var(--font-mono)',
+        fontSize: '13px',
+        lineHeight: 1.7,
+        color: '#d4d4d8',
+        padding: '12px 14px',
+        flex: 1,
+        overflowY: 'auto',
+        whiteSpace: 'pre-wrap',
+        wordBreak: 'break-word',
+      }
+    : {
+        fontFamily: 'var(--font-mono)',
+        fontSize: '13px',
+        lineHeight: 1.7,
+        color: '#d4d4d8',
+        padding: '12px 14px',
+        height: '280px',
+        overflowY: 'auto',
+        whiteSpace: 'pre-wrap',
+        wordBreak: 'break-word',
+      };
+
+  // Dot button base style
+  const dotBase: React.CSSProperties = {
+    width: 9,
+    height: 9,
+    borderRadius: '50%',
+    border: 'none',
+    padding: 0,
+    cursor: 'pointer',
+    display: 'inline-block',
+    flexShrink: 0,
+  };
+
   return (
     <div className="heroTerminal">
-      <div
-        style={{
-          background: 'rgba(24,24,27,0.88)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          borderRadius: '10px',
-          overflow: 'hidden',
-          backdropFilter: 'blur(2px)',
-        }}
-        onClick={() => inputRef.current?.focus()}
-      >
+      <div style={wrapStyle} onClick={() => inputRef.current?.focus()}>
+        {/* Title bar */}
         <div
           style={{
             display: 'flex',
@@ -274,14 +376,37 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
             gap: '6px',
             padding: '10px 12px',
             borderBottom: '1px solid rgba(255,255,255,0.07)',
+            flexShrink: 0,
           }}
         >
-          {[0, 1, 2].map((i) => (
-            <span
-              key={i}
-              style={{ width: 9, height: 9, borderRadius: '50%', background: '#3f3f46', display: 'inline-block' }}
-            />
-          ))}
+          <button
+            type="button"
+            aria-label="Print easter-egg message"
+            onClick={(e) => { e.stopPropagation(); onRedDot(); }}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); onRedDot(); } }}
+            style={{ ...dotBase, background: DOT_RED }}
+            onFocus={(e) => Object.assign(e.currentTarget.style, FOCUS_RING)}
+            onBlur={(e) => { e.currentTarget.style.outline = ''; e.currentTarget.style.outlineOffset = ''; }}
+          />
+          <button
+            type="button"
+            aria-label="Restore default size"
+            onClick={(e) => { e.stopPropagation(); onYellowDot(); }}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); onYellowDot(); } }}
+            style={{ ...dotBase, background: DOT_YELLOW }}
+            onFocus={(e) => Object.assign(e.currentTarget.style, FOCUS_RING)}
+            onBlur={(e) => { e.currentTarget.style.outline = ''; e.currentTarget.style.outlineOffset = ''; }}
+          />
+          <button
+            type="button"
+            aria-label={maximized ? 'Restore terminal size' : 'Maximize terminal'}
+            onClick={(e) => { e.stopPropagation(); onGreenDot(); }}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); onGreenDot(); } }}
+            className="termMaxBtn"
+            style={{ ...dotBase, background: DOT_GREEN }}
+            onFocus={(e) => Object.assign(e.currentTarget.style, FOCUS_RING)}
+            onBlur={(e) => { e.currentTarget.style.outline = ''; e.currentTarget.style.outlineOffset = ''; }}
+          />
           <span
             style={{
               fontFamily: 'var(--font-mono)',
@@ -293,25 +418,19 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
             gary@jobs.garyhyde.com
           </span>
         </div>
+
+        {/* Scrollback output */}
         <div
           ref={outRef}
           role="log"
           aria-live="polite"
           aria-label="Terminal output"
-          style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '13px',
-            lineHeight: 1.7,
-            color: '#d4d4d8',
-            padding: '12px 14px',
-            height: '280px',
-            overflowY: 'auto',
-            whiteSpace: 'pre-wrap',
-            wordBreak: 'break-word',
-          }}
+          style={outputStyle}
         >
           {lines.join('\n')}
         </div>
+
+        {/* Input row */}
         <div
           style={{
             display: 'flex',
@@ -320,6 +439,7 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
             padding: '8px 14px 12px',
             fontFamily: 'var(--font-mono)',
             fontSize: '13px',
+            flexShrink: 0,
           }}
         >
           <span style={{ color: '#F59E0B' }} aria-hidden>{promptLabel}</span>
@@ -345,6 +465,8 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
           />
         </div>
       </div>
+
+      {/* Chips row */}
       <div className="heroTermChips">
         {CHIPS.map((c) => (
           <button
