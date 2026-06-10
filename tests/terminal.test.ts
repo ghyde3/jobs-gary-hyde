@@ -51,16 +51,32 @@ describe('resolveCommand', () => {
     if (r.kind === 'pulse') expect(r.theme).toBe('matrix');
   });
 
-  it('ask routes the question', () => {
-    const r = resolveCommand('ask do you know graphql');
-    expect(r.kind).toBe('ask');
-    if (r.kind === 'ask') expect(r.question).toBe('do you know graphql');
+  it('ask with no arg enters ai mode without a question', () => {
+    const r = resolveCommand('ask');
+    expect(r.kind).toBe('enter-ai');
+    if (r.kind === 'enter-ai') expect(r.question).toBeUndefined();
   });
 
-  it('unknown input falls through to ask with a notice', () => {
+  it('ask with a question enters ai mode and carries the question', () => {
+    const r = resolveCommand('ask do you know graphql');
+    expect(r.kind).toBe('enter-ai');
+    if (r.kind === 'enter-ai') expect(r.question).toBe('do you know graphql');
+  });
+
+  it('unknown command prints not-found text', () => {
     const r = resolveCommand('do you know graphql?');
-    expect(r.kind).toBe('ask');
-    if (r.kind === 'ask') expect(r.notice).toBeTruthy();
+    expect(r.kind).toBe('text');
+    if (r.kind === 'text') {
+      const out = r.lines.join(' ');
+      expect(out).toContain('command not found');
+      expect(out).toContain('ask');
+    }
+  });
+
+  it('unknown command includes the command name in the error', () => {
+    const r = resolveCommand('frobnicate');
+    expect(r.kind).toBe('text');
+    if (r.kind === 'text') expect(r.lines[0]).toContain('frobnicate');
   });
 });
 

@@ -7,6 +7,7 @@ export const HELP_LINES = [
   '  contact      reach me',
   '  cat resume.pdf',
   '  clear        wipe the screen',
+  '  ask          start a conversation with gary-ai (ask <question> to jump in)',
   '',
   'for recruiters:',
   '  pitch        30-second summary (pitch 60, pitch 120 for longer)',
@@ -15,7 +16,6 @@ export const HELP_LINES = [
   '  interview    suggested interview questions',
   '  faq          logistics: location, remote, availability',
   '',
-  'anything else you type gets answered by gary-ai.',
   'there are also a few undocumented commands. happy hunting.',
 ];
 
@@ -57,7 +57,9 @@ export const EGG_COFFEE_LINES = ["418 I'm a teapot"];
 
 export const EGG_MATRIX_LINES = ['wake up, neo... (10 seconds)'];
 
-export const ASK_NOTICE = 'not a command. asking gary-ai...';
+export const AI_BANNER = "gary-ai interactive. ask anything about gary. type 'exit' to leave.";
+
+export const AI_GOODBYE = 'gary-ai session ended. back at the shell.';
 
 export const BUSY_LINE = 'one question at a time, please.';
 

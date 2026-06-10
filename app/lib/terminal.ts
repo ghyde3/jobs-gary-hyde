@@ -9,7 +9,6 @@ import {
   EGG_VIM_QUIT_LINES,
   EGG_COFFEE_LINES,
   EGG_MATRIX_LINES,
-  ASK_NOTICE,
 } from '../data/terminal';
 import { PITCHES, ROLE_FIT, CONCERNS, INTERVIEW_KIT, FAQ } from '../data/recruiter';
 
@@ -19,7 +18,7 @@ export type CommandResult =
   | { kind: 'open'; url: string; lines: string[] }
   | { kind: 'scroll'; target: string; lines: string[] }
   | { kind: 'pulse'; lines: string[]; theme?: 'matrix' }
-  | { kind: 'ask'; question: string; notice?: string };
+  | { kind: 'enter-ai'; question?: string };
 
 // Commands offered by tab completion. Easter eggs stay out on purpose.
 const COMPLETABLE = [
@@ -103,8 +102,8 @@ export function resolveCommand(raw: string): CommandResult {
       }
       return { kind: 'text', lines: ['usage: gary --profile'] };
     case 'ask':
-      if (!arg) return { kind: 'text', lines: ['usage: ask <question about gary>'] };
-      return { kind: 'ask', question: arg };
+      if (!arg) return { kind: 'enter-ai' };
+      return { kind: 'enter-ai', question: arg };
     case 'sudo':
       if (arg === 'hire gary') return { kind: 'pulse', lines: EGG_SUDO_LINES };
       return { kind: 'text', lines: ['nice try. only one sudo command works here.'] };
@@ -168,8 +167,9 @@ export function resolveCommand(raw: string): CommandResult {
         ]),
       };
     default:
-      // Anything unrecognized becomes a question for gary-ai. The component
-      // shows the notice only the first time so the trick stays discoverable.
-      return { kind: 'ask', question: input, notice: ASK_NOTICE };
+      return {
+        kind: 'text',
+        lines: [`command not found: ${head}. try 'help', or 'ask' to talk to gary-ai.`],
+      };
   }
 }
