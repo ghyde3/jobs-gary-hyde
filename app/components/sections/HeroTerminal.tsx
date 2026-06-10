@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { resolveCommand, completions, type CommandResult } from '../../lib/terminal';
-import { BUSY_LINE, OFFLINE_LINES, AI_BANNER, AI_GOODBYE, WIN_RED_LINE } from '../../data/terminal';
+import { BUSY_LINE, OFFLINE_LINES, AI_BANNER_LINES, AI_GOODBYE, WIN_RED_LINE } from '../../data/terminal';
 import { type HistoryItem } from '../../lib/ask';
 import { pulseDots } from './HeroDots';
 
@@ -179,7 +179,7 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
         return;
       case 'enter-ai':
         enterAiMode();
-        push(AI_BANNER);
+        push(...AI_BANNER_LINES);
         if (r.question) {
           push(`ai> ${r.question}`);
           aiInputHistory.current.push(r.question);
@@ -418,6 +418,27 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
             gary@jobs.garyhyde.com
           </span>
         </div>
+
+        {/* gary-ai mode strip - visible only while in ai mode */}
+        {mode === 'ai' && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '4px 12px',
+              background: 'rgba(245,158,11,0.08)',
+              borderBottom: '1px solid rgba(245,158,11,0.18)',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '11px',
+              color: '#F59E0B',
+              flexShrink: 0,
+            }}
+          >
+            <span>[/] gary-ai</span>
+            <span style={{ color: '#a3730a' }}>type exit to leave</span>
+          </div>
+        )}
 
         {/* Scrollback output */}
         <div

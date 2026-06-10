@@ -57,7 +57,18 @@ export const EGG_COFFEE_LINES = ["418 I'm a teapot"];
 
 export const EGG_MATRIX_LINES = ['wake up, neo... (10 seconds)'];
 
+// Legacy single-line export kept for reference; the component uses AI_BANNER_LINES.
 export const AI_BANNER = "gary-ai interactive. ask anything about gary. type 'exit' to leave.";
+
+// Multi-line entry banner for gary-ai mode (8.4).
+// Mascot: a compact 4-line ASCII figure. Wordmark on line 2, hint on line 5.
+export const AI_BANNER_LINES = [
+  '  _____',
+  ' / g-a \\   gary-ai -- recruiter assistant',
+  '|  [ ] |   ask me anything about gary.',
+  ' \\_____/   i know the resume. i know the work.',
+  "           type 'exit' to leave.",
+];
 
 export const WIN_RED_LINE = "this terminal stays open. gary needs the work.";
 
