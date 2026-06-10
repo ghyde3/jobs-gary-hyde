@@ -69,4 +69,25 @@ Existing command and easter egg behavior is unchanged. Pure-resolver pattern con
 
 ## 6. Pending content from Gary (follow-up drop, do not block the build)
 
-Availability/start date, work authorization, notice period, contract rate posture, any real impact metrics he can stand behind, GitHub/LinkedIn URLs (or confirmation to omit), and sign-off on the `WHY_AVAILABLE` wording.
+Availability/start date, work authorization, notice period, contract rate posture, any real impact metrics he can stand behind, GitHub/LinkedIn URLs (or confirmation to omit), and sign-off on the `WHY_AVAILABLE` wording. (Delivered 2026-06-10: all items resolved; impact metrics deliberately omitted.)
+
+## 7. Revision (2026-06-10): gary-ai becomes a program, not a fallback
+
+Gary's call: unknown input falling through to the AI felt like an if/else, not a terminal. The AI is now an interactive program you launch.
+
+Behavior:
+
+- `ask` launches gary-ai mode: prints a short banner ("gary-ai interactive. ask anything about gary. type 'exit' to leave."), and the input prompt indicator changes from `$` to `ai>`.
+- `ask <question>` launches the mode and immediately submits that question (keeps chips and suggested-question hints working unchanged).
+- Inside the mode, every input line is sent to the AI except: `exit`, `quit`, and `q` leave the mode (print a one-line goodbye and restore the `$` prompt); `clear` clears the scrollback locally.
+- At the shell, unknown commands no longer reach the AI. They print: `command not found: <cmd>. try 'help', or 'ask' to talk to gary-ai.` The first-time ASK_NOTICE behavior is removed.
+- Tab completion and command history work at the shell as before; inside ai mode, up/down recalls prior questions, tab does nothing.
+
+Conversation memory (new, because a program implies a session):
+
+- The client keeps the current ai-mode session's exchanges and sends recent history with each request: `POST /api/ask` body becomes `{ question: string, history?: { q: string, a: string }[] }`.
+- Server validation: `history` optional; max 4 items; each `q` max 280 chars, each `a` max 1200 chars; non-conforming history is dropped (request still served), never an error.
+- The route maps history to alternating user/assistant messages ahead of the new question. System prompt, model, max_tokens 300, caching, and all rate limiting are unchanged; each question is still one rate-limited request.
+- History resets when the visitor exits ai mode.
+
+Acceptance: resolver tests updated (unknown command yields the not-found text; `ask` yields an enter-ai result with optional question), validation tests cover history caps and the drop-not-error rule, and manual QA confirms: enter mode, ask "what has gary shipped?", follow up with "which of those is most impressive?" and get a contextual answer, then `exit` returns to the shell where `pitch 60` still works.
