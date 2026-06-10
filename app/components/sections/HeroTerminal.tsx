@@ -6,7 +6,8 @@ import { BUSY_LINE, OFFLINE_LINES } from '../../data/terminal';
 import { pulseDots } from './HeroDots';
 
 const MAX_SCROLLBACK = 200;
-const CHIPS = ['help', 'whoami', 'projects', 'stack', 'sudo hire gary'];
+const CHIPS = ['why should we hire gary?', 'pitch 60', 'fit', 'concerns', 'sudo hire gary'];
+const BOOT_HINT = 'try: pitch 60, fit, or ask why should we hire gary?';
 const BOOT_DELAY_MS = 2500;
 const TYPE_MS = 8;
 
@@ -119,10 +120,11 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
 
   // Idle autoplay: the terminal demos itself until the visitor interacts.
   useEffect(() => {
-    const timer = setTimeout(() => {
+    const timer = setTimeout(async () => {
       if (!userActed.current) {
         push(`$ ${boot}`);
-        void handleResult(resolveCommand(boot));
+        await handleResult(resolveCommand(boot));
+        if (!userActed.current) push(BOOT_HINT);
       }
     }, BOOT_DELAY_MS);
     return () => clearTimeout(timer);
