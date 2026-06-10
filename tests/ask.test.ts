@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { validateQuestion, buildSystemPrompt, MAX_QUESTION_LENGTH } from '../app/lib/ask';
+import { WHY_AVAILABLE } from '../app/data/recruiter';
 
 describe('validateQuestion', () => {
   it('accepts a normal question', () => {
@@ -49,7 +50,7 @@ describe('buildSystemPrompt', () => {
 
   it('contains the WHY_AVAILABLE scripted line', () => {
     const s = buildSystemPrompt();
-    expect(s).toContain("Gary's role at Forward Thinking Marketing concluded in May 2026");
+    expect(s).toContain(WHY_AVAILABLE);
   });
 
   it('contains no dollar amounts followed by digits', () => {

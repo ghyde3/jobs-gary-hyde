@@ -275,6 +275,6 @@ export const PHOTOS: Photo[] = [
 
 export const LINKS: Links = {
   email: 'Gary.Robert.Hyde@gmail.com',
-  github: '',
-  linkedin: '',
+  github: 'https://github.com/ghyde3',
+  linkedin: 'https://www.linkedin.com/in/ghyde3/',
 };

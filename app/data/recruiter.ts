@@ -142,7 +142,27 @@ export const FAQ: { question: string; answer: string }[] = [
     answer:
       'The portfolio at jobs.garyhyde.com has live projects and case notes. Source code for some projects is on GitHub at github.com/ghyde3.',
   },
+  {
+    question: 'When can Gary start?',
+    answer:
+      'Right away. He\'s available immediately and has no notice period to work around.',
+  },
+  {
+    question: 'Does Gary need visa sponsorship?',
+    answer:
+      'No. Gary is a US citizen, no sponsorship or work authorization needed.',
+  },
+  {
+    question: 'What does Gary charge for contract work?',
+    answer:
+      'Gary takes both full-time and contract roles. Rates depend on scope and length, so email him at ghyde03@gmail.com or book a call at https://calendar.app.google/r5fU8RqL8ked3YBq6 to talk specifics.',
+  },
+  {
+    question: 'Where can I see Gary\'s profiles?',
+    answer:
+      'LinkedIn: https://www.linkedin.com/in/ghyde3/ and GitHub: https://github.com/ghyde3. Portfolio: https://jobs.garyhyde.com.',
+  },
 ];
 
 export const WHY_AVAILABLE: string =
-  "Gary's role at Forward Thinking Marketing concluded in May 2026 after 2.5 years. He's now focused on senior full-stack opportunities.";
+  "Gary's role at Forward Thinking Marketing concluded in May 2026 after 2.5 years. The company sells hemp-derived products under the 2018 Farm Bill, and a new federal THC rule taking effect in November 2026 closes that market, so the business is winding down its product lines. Gary is now focused on senior full-stack roles.";
