@@ -11,6 +11,7 @@ import {
   EGG_MATRIX_LINES,
   ASK_NOTICE,
 } from '../data/terminal';
+import { PITCHES, ROLE_FIT, CONCERNS, INTERVIEW_KIT, FAQ } from '../data/recruiter';
 
 export type CommandResult =
   | { kind: 'text'; lines: string[] }
@@ -123,6 +124,49 @@ export function resolveCommand(raw: string): CommandResult {
         return { kind: 'pulse', theme: 'matrix', lines: EGG_MATRIX_LINES };
       }
       return { kind: 'text', lines: ['themes: matrix (temporarily)'] };
+    case 'pitch': {
+      if (arg === '60') return { kind: 'text', lines: [PITCHES.sixty] };
+      if (arg === '120') return { kind: 'text', lines: [PITCHES.twoMinutes] };
+      return { kind: 'text', lines: [PITCHES.thirty] };
+    }
+    case 'fit':
+      return {
+        kind: 'text',
+        lines: [
+          'strongest fit:',
+          ...ROLE_FIT.strongestFit.map((r) => `  - ${r}`),
+          '',
+          'weaker fit:',
+          ...ROLE_FIT.weakerFit.map((r) => `  - ${r}`),
+        ],
+      };
+    case 'concerns':
+      return {
+        kind: 'text',
+        lines: CONCERNS.flatMap((c, i) => [
+          ...(i > 0 ? [''] : []),
+          `Q: ${c.question}`,
+          `A: ${c.answer}`,
+        ]),
+      };
+    case 'interview':
+      return {
+        kind: 'text',
+        lines: Object.entries(INTERVIEW_KIT).flatMap(([section, questions], i) => [
+          ...(i > 0 ? [''] : []),
+          `[${section}]`,
+          ...questions.map((q) => `  - ${q}`),
+        ]),
+      };
+    case 'faq':
+      return {
+        kind: 'text',
+        lines: FAQ.flatMap((f, i) => [
+          ...(i > 0 ? [''] : []),
+          `Q: ${f.question}`,
+          `A: ${f.answer}`,
+        ]),
+      };
     default:
       // Anything unrecognized becomes a question for gary-ai. The component
       // shows the notice only the first time so the trick stays discoverable.

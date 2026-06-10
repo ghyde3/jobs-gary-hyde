@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { resolveCommand, completions } from '../app/lib/terminal';
+import { PITCHES, ROLE_FIT, CONCERNS, INTERVIEW_KIT, FAQ } from '../app/data/recruiter';
 
 describe('resolveCommand', () => {
   it('returns help text', () => {
@@ -69,5 +70,68 @@ describe('completions', () => {
   });
   it('returns nothing for no match', () => {
     expect(completions('zzz')).toEqual([]);
+  });
+});
+
+describe('recruiter commands', () => {
+  it('pitch returns the 30-second pitch by default', () => {
+    const r = resolveCommand('pitch');
+    expect(r.kind).toBe('text');
+    if (r.kind === 'text') expect(r.lines.join(' ')).toContain(PITCHES.thirty);
+  });
+
+  it('pitch 60 returns the 60-second pitch', () => {
+    const r = resolveCommand('pitch 60');
+    expect(r.kind).toBe('text');
+    if (r.kind === 'text') expect(r.lines.join(' ')).toContain(PITCHES.sixty);
+  });
+
+  it('pitch 120 returns the two-minute pitch', () => {
+    const r = resolveCommand('pitch 120');
+    expect(r.kind).toBe('text');
+    if (r.kind === 'text') expect(r.lines.join(' ')).toContain(PITCHES.twoMinutes);
+  });
+
+  it('fit lists strongest fit roles', () => {
+    const r = resolveCommand('fit');
+    expect(r.kind).toBe('text');
+    if (r.kind === 'text') {
+      const out = r.lines.join('\n');
+      expect(out).toContain('strongest fit');
+      expect(out).toContain('weaker fit');
+      expect(out).toContain(ROLE_FIT.strongestFit[0]);
+      expect(out).toContain(ROLE_FIT.weakerFit[0]);
+    }
+  });
+
+  it('concerns prints each Q&A pair', () => {
+    const r = resolveCommand('concerns');
+    expect(r.kind).toBe('text');
+    if (r.kind === 'text') {
+      const out = r.lines.join('\n');
+      expect(out).toContain(CONCERNS[0].question);
+      expect(out).toContain(CONCERNS[0].answer);
+    }
+  });
+
+  it('interview prints section headers and questions', () => {
+    const r = resolveCommand('interview');
+    expect(r.kind).toBe('text');
+    if (r.kind === 'text') {
+      const out = r.lines.join('\n');
+      const firstSection = Object.keys(INTERVIEW_KIT)[0];
+      expect(out).toContain(firstSection);
+      expect(out).toContain(Object.values(INTERVIEW_KIT)[0][0]);
+    }
+  });
+
+  it('faq prints each FAQ Q&A pair', () => {
+    const r = resolveCommand('faq');
+    expect(r.kind).toBe('text');
+    if (r.kind === 'text') {
+      const out = r.lines.join('\n');
+      expect(out).toContain(FAQ[0].question);
+      expect(out).toContain(FAQ[0].answer);
+    }
   });
 });

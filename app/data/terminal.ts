@@ -8,6 +8,13 @@ export const HELP_LINES = [
   '  cat resume.pdf',
   '  clear        wipe the screen',
   '',
+  'for recruiters:',
+  '  pitch        30-second summary (pitch 60, pitch 120 for longer)',
+  '  fit          strongest and weaker fit roles',
+  '  concerns     common objections, answered',
+  '  interview    suggested interview questions',
+  '  faq          logistics: location, remote, availability',
+  '',
   'anything else you type gets answered by gary-ai.',
   'there are also a few undocumented commands. happy hunting.',
 ];
