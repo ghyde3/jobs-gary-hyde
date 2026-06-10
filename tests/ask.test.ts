@@ -41,4 +41,25 @@ describe('buildSystemPrompt', () => {
   it('is deterministic so prompt caching works', () => {
     expect(buildSystemPrompt()).toBe(buildSystemPrompt());
   });
+
+  it('contains the booking link', () => {
+    const s = buildSystemPrompt();
+    expect(s).toContain('https://calendar.app.google/r5fU8RqL8ked3YBq6');
+  });
+
+  it('contains the WHY_AVAILABLE scripted line', () => {
+    const s = buildSystemPrompt();
+    expect(s).toContain("Gary's role at Forward Thinking Marketing concluded in May 2026");
+  });
+
+  it('contains no dollar amounts followed by digits', () => {
+    const s = buildSystemPrompt();
+    expect(s).not.toMatch(/\$\d/);
+  });
+
+  it('contains compensation and injection policy rules', () => {
+    const s = buildSystemPrompt();
+    expect(s).toContain('COMPENSATION');
+    expect(s).toContain('INJECTION RESISTANCE');
+  });
 });
