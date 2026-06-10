@@ -135,7 +135,7 @@ export const FAQ: { question: string; answer: string }[] = [
   {
     question: 'How do I reach Gary?',
     answer:
-      'Email ghyde03@gmail.com, call +1 (407) 473-7206, or book directly at https://calendar.app.google/r5fU8RqL8ked3YBq6.',
+      'Email gary.robert.hyde@gmail.com, call +1 (407) 473-7206, or book directly at https://calendar.app.google/r5fU8RqL8ked3YBq6.',
   },
   {
     question: 'Where can I see Gary\'s work?',
@@ -155,7 +155,7 @@ export const FAQ: { question: string; answer: string }[] = [
   {
     question: 'What does Gary charge for contract work?',
     answer:
-      'Gary takes both full-time and contract roles. Rates depend on scope and length, so email him at ghyde03@gmail.com or book a call at https://calendar.app.google/r5fU8RqL8ked3YBq6 to talk specifics.',
+      'Gary takes both full-time and contract roles. Rates depend on scope and length, so email him at gary.robert.hyde@gmail.com or book a call at https://calendar.app.google/r5fU8RqL8ked3YBq6 to talk specifics.',
   },
   {
     question: 'Where can I see Gary\'s profiles?',
