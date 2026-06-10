@@ -5,9 +5,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest run",
+    "knowledge": "node scripts/build-knowledge.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.104.1",
+    "@upstash/redis": "^1.38.0",
     "lucide-react": "^0.511.0",
     "next": "^15.3.3",
     "react": "^19.2.7",
@@ -18,6 +22,7 @@
     "@types/node": "^20",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.8"
   }
 }
