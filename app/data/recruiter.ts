@@ -162,6 +162,11 @@ export const FAQ: { question: string; answer: string }[] = [
     answer:
       'LinkedIn: https://www.linkedin.com/in/ghyde3/ and GitHub: https://github.com/ghyde3. Portfolio: https://jobs.garyhyde.com.',
   },
+  {
+    question: 'What is a memorable fact about Gary?',
+    answer:
+      'Gary and his wife built a wedding-decor Etsy business, Posh Love, to over $750k in lifetime gross sales over about five years. The flagship product was handmade copper backdrop frames; the business wound down when copper material costs made it unviable.',
+  },
 ];
 
 export const WHY_AVAILABLE: string =

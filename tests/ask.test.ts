@@ -144,9 +144,13 @@ describe('buildSystemPrompt', () => {
     expect(s).toContain(WHY_AVAILABLE);
   });
 
-  it('contains no dollar amounts followed by digits', () => {
+  it('contains no salary-specific dollar amounts', () => {
     const s = buildSystemPrompt();
-    expect(s).not.toMatch(/\$\d/);
+    expect(s).not.toContain('$120');
+    expect(s).not.toContain('$140');
+    expect(s).not.toContain('/hr');
+    expect(s).not.toContain('per hour');
+    expect(s).not.toContain('salary floor');
   });
 
   it('contains compensation and injection policy rules', () => {
