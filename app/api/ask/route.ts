@@ -7,7 +7,7 @@ import { checkLimits, dayKey, PER_VISITOR_DAILY } from '../../lib/ratelimit';
 export const runtime = 'nodejs';
 
 const COOKIE = 'gaq';
-const SECRET = process.env.ANTHROPIC_API_KEY ?? 'dev-secret';
+const SECRET = process.env.ANTHROPIC_API_KEY ?? process.env.CLAUDE_API_KEY ?? 'dev-secret';
 
 function sign(payload: string): string {
   return createHmac('sha256', SECRET).update(payload).digest('hex').slice(0, 16);
@@ -62,7 +62,9 @@ export async function POST(req: NextRequest) {
 
   const setCookie = cookieHeader(day, cookieCount + 1);
 
-  const client = new Anthropic(); // reads ANTHROPIC_API_KEY from the environment
+  // Vercel may store the key under the legacy CLAUDE_API_KEY name
+  const apiKey = process.env.ANTHROPIC_API_KEY ?? process.env.CLAUDE_API_KEY;
+  const client = new Anthropic({ apiKey });
   // Map validated history to alternating user/assistant messages before the
   // new question so the model has conversational context.
   type MessageParam = { role: 'user' | 'assistant'; content: string };
