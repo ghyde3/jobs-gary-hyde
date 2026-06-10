@@ -91,3 +91,47 @@ Conversation memory (new, because a program implies a session):
 - History resets when the visitor exits ai mode.
 
 Acceptance: resolver tests updated (unknown command yields the not-found text; `ask` yields an enter-ai result with optional question), validation tests cover history caps and the drop-not-error rule, and manual QA confirms: enter mode, ask "what has gary shipped?", follow up with "which of those is most impressive?" and get a contextual answer, then `exit` returns to the shell where `pitch 60` still works.
+
+## 8. Revision (2026-06-10): polish round
+
+Five changes from Gary's review.
+
+### 8.1 Instant boot
+
+The terminal currently waits 2.5 seconds before autoplaying `gary --profile`. Remove the perceived delay: autoplay begins as soon as the component mounts (a technical grace of up to ~300ms for hydration is acceptable, nothing a human would notice). Cancel-on-interaction behavior is unchanged.
+
+### 8.2 Model swap to Haiku
+
+`/api/ask` moves from `claude-opus-4-8` to `claude-haiku-4-5`. Nothing else about the request changes (max_tokens 300, system prompt, cache_control, history mapping, rate limits). Rationale: cost; the recruiter Q&A task is well within Haiku's range, and the knowledge prompt is large enough to clear Haiku's prompt-cache minimum.
+
+### 8.3 Working window controls
+
+The three title-bar circles become real buttons (currently decorative gray dots):
+
+- Green: toggles maximized mode. Maximized renders the terminal as a fixed overlay centered in the viewport at roughly 90vw by 85vh (never the browser Fullscreen API), above all page content, output area growing to fill the height. Escape or green again restores. Body scroll is locked while maximized.
+- Yellow: restores default size (no-op when already default).
+- Red: does not close anything; prints a playful one-liner in the terminal (eg "this terminal stays open. gary needs the work.") in keeping with the easter eggs.
+- Buttons get the conventional muted traffic-light colors (a deliberate small exception to the single-accent rule; they are 9px dots and the success green already exists in the badge), proper aria-labels, and focus styles. Transition 200ms ease-out; no transition under prefers-reduced-motion. On screens under 900px the maximize button is hidden (mobile already gets full width).
+
+### 8.4 gary-ai program dress
+
+Entering ai mode should feel like launching a real CLI program (Claude Code energy):
+
+- A printed ASCII banner on entry: a small tasteful mascot (3 to 5 lines of plain ASCII, no emoji) plus a gary-ai wordmark and the hint line. Replaces the current single banner line.
+- While in ai mode, a thin persistent header strip under the title bar inside the terminal: amber accent, a small mascot glyph, "gary-ai" label, and right-aligned "type exit to leave". Disappears on exit.
+- The ai-mode prompt stays `ai>`.
+
+### 8.5 Personal background content
+
+Public profile (and therefore the AI knowledge) gains a short "Beyond the code" section, facts as Gary stated them, anchored to years so they do not silently go stale:
+
+- Born in Daytona Beach, Florida, in 1988.
+- Married; 2026 marks 16 years together with his wife. They have a daughter, 13 as of 2026.
+- Has not traveled much but enjoys sightseeing.
+- A builder beyond software: woodworking, lifetime visual artist (drawing, painting, markers), with sculpting still on the list to try.
+- Photographer: shoots a Sony A7 III with a 50mm prime.
+- Wanted to be an architect growing up.
+
+Contact email standardizes to gary.robert.hyde@gmail.com everywhere visitor-facing: profile.ts LINKS.email (normalize casing), recruiter.ts FAQ answers, and the public profile identity block (replacing ghyde03@gmail.com in all of them). The internal master profile is untouched.
+
+Acceptance for the round: tests green, build green, knowledge regenerated containing the new section and new email and no trace of ghyde03, one live AI answer on Haiku confirming voice and policy hold, and a screenshot-level check of maximized mode and the ai-mode header.
