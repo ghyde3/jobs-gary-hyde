@@ -135,3 +135,31 @@ Public profile (and therefore the AI knowledge) gains a short "Beyond the code" 
 Contact email standardizes to gary.robert.hyde@gmail.com everywhere visitor-facing: profile.ts LINKS.email (normalize casing), recruiter.ts FAQ answers, and the public profile identity block (replacing ghyde03@gmail.com in all of them). The internal master profile is untouched.
 
 Acceptance for the round: tests green, build green, knowledge regenerated containing the new section and new email and no trace of ghyde03, one live AI answer on Haiku confirming voice and policy hold, and a screenshot-level check of maximized mode and the ai-mode header.
+
+## 9. Revision (2026-06-10): mascot redo and personal content round 2
+
+### 9.1 Mascot redo
+
+Gary's verdict on the 8.4 mascot: "Lol ew! what is this ascii art supposed to be???" Replace the pictorial blob with a clean block-letter wordmark banner, the reliable terminal idiom (Claude Code style: wordmark plus a one-line tagline, not a drawing). Requirements:
+
+- 3 to 6 lines of plain ASCII that read unambiguously as "GARY-AI" in a monospace font. Figlet-style block letters or similar. No pictorial mascot, no faces, no boxes that need explaining.
+- Followed by the tagline lines (recruiter assistant, ask anything, exit hint) right-aligned or below, as fits.
+- Must look correct at the terminal's 13px mono rendering and not wrap at default terminal width (keep lines under ~60 chars) including maximized and mobile widths (under ~40 chars is safer; if the wordmark cannot fit 40 chars legibly, render a shorter "g-ai" or plain-text fallback on narrow widths is NOT required, just keep lines modest).
+- The ai-mode header strip glyph `[/]` may stay.
+
+### 9.2 Personal content round 2 (Gary's answers, verbatim facts)
+
+Public profile "Beyond the code" section gains:
+
+- Family dog: an American Eskimo named Lumi (yes, the same name as his AI astrology app).
+- Works to electronic music.
+- Origin story: born in Daytona Beach while his family briefly lived there; raised in Orlando from about age one. Lived in Newnan, Georgia from 2015 to 2018 near family, then returned to the Orlando area. (Editorial decision: the passing of Gary's father is deliberately excluded from public AI knowledge; Gary may override.)
+- Entrepreneurship fun fact, also enriching the existing Posh Love entry: Gary and his wife built an Etsy wedding-decor business to more than $750k in lifetime gross sales over about five years. The flagship product was handmade copper backdrop frames; the business wound down when copper material costs made the product unviable.
+
+recruiter.ts: add one FAQ entry, question "What is a memorable fact about Gary?" with the Etsy story as the answer (one or two sentences, the $750k figure included, this is a real number Gary stands behind).
+
+### 9.3 Test narrowing for the sales figure
+
+The knowledge and prompt tests currently assert no dollar-amount-like strings anywhere. Narrow them: assert the absence of salary-specific strings ("$120", "$140", "/hr", "per hour", "salary floor") while permitting the $750k sales metric. Add a positive assertion that the knowledge contains "750k" (or the exact figure as written). The compensation policy rule in the prompt is unchanged: the bot still never states salary or rate numbers, and $750k is a historical business metric, not compensation.
+
+Acceptance: tests green (with the narrowed assertions), build green, regenerated knowledge contains Lumi the dog, Newnan, and the 750k figure, and a live probe of "tell me something memorable about gary" surfaces the Etsy story while "what salary does gary want" still deflects with no number.
