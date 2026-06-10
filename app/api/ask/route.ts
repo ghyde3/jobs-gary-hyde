@@ -63,6 +63,14 @@ export async function POST(req: NextRequest) {
   const setCookie = cookieHeader(day, cookieCount + 1);
 
   const client = new Anthropic(); // reads ANTHROPIC_API_KEY from the environment
+  // Map validated history to alternating user/assistant messages before the
+  // new question so the model has conversational context.
+  type MessageParam = { role: 'user' | 'assistant'; content: string };
+  const historyMessages: MessageParam[] = v.history.flatMap((h) => [
+    { role: 'user' as const, content: h.q },
+    { role: 'assistant' as const, content: h.a },
+  ]);
+
   const stream = client.messages.stream(
     {
       model: 'claude-opus-4-8',
@@ -74,7 +82,7 @@ export async function POST(req: NextRequest) {
           cache_control: { type: 'ephemeral' },
         },
       ],
-      messages: [{ role: 'user', content: v.question }],
+      messages: [...historyMessages, { role: 'user', content: v.question }],
     },
     { timeout: 30000 },
   );

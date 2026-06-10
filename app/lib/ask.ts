@@ -3,21 +3,53 @@ import { PROFILE, PROJECTS, heroTags, STATS, LINKS } from '../data/profile';
 import { PITCHES, WORK_STYLE, ROLE_FIT, CONCERNS, FAQ, WHY_AVAILABLE } from '../data/recruiter';
 
 export const MAX_QUESTION_LENGTH = 280;
+export const MAX_HISTORY_ITEMS = 4;
+export const MAX_HISTORY_Q_LENGTH = 280;
+export const MAX_HISTORY_A_LENGTH = 1200;
+
+export type HistoryItem = { q: string; a: string };
+
+// Validate a single history item. Returns the item if valid, null if not.
+function validateHistoryItem(item: unknown): HistoryItem | null {
+  if (typeof item !== 'object' || item === null) return null;
+  const { q, a } = item as Record<string, unknown>;
+  if (typeof q !== 'string' || typeof a !== 'string') return null;
+  if (q.length === 0 || q.length > MAX_HISTORY_Q_LENGTH) return null;
+  if (a.length === 0 || a.length > MAX_HISTORY_A_LENGTH) return null;
+  return { q, a };
+}
+
+// Validate the history field. Returns a clean array (possibly empty).
+// Non-conforming or oversized history is silently dropped -- never an error.
+export function validateHistory(raw: unknown): HistoryItem[] {
+  if (!Array.isArray(raw)) return [];
+  const items: HistoryItem[] = [];
+  for (const item of raw) {
+    const valid = validateHistoryItem(item);
+    if (valid) items.push(valid);
+  }
+  // If the array exceeds the cap the whole history is dropped (too many items
+  // means the client is misbehaving -- safer to discard than to silently truncate).
+  if (items.length > MAX_HISTORY_ITEMS) return [];
+  return items;
+}
 
 export function validateQuestion(
   body: unknown,
-): { ok: true; question: string } | { ok: false; error: string } {
+): { ok: true; question: string; history: HistoryItem[] } | { ok: false; error: string } {
   if (typeof body !== 'object' || body === null) {
     return { ok: false, error: 'bad request.' };
   }
-  const q = (body as Record<string, unknown>).question;
+  const b = body as Record<string, unknown>;
+  const q = b.question;
   if (typeof q !== 'string') return { ok: false, error: 'bad request.' };
   const question = q.trim();
   if (!question) return { ok: false, error: 'ask me something first.' };
   if (question.length > MAX_QUESTION_LENGTH) {
     return { ok: false, error: `keep it under ${MAX_QUESTION_LENGTH} characters.` };
   }
-  return { ok: true, question };
+  const history = validateHistory(b.history);
+  return { ok: true, question, history };
 }
 
 // Deterministic by construction: same inputs, same string, so the Anthropic
