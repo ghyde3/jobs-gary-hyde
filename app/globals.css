@@ -80,3 +80,28 @@ a {
     padding: 64px 0;
   }
 }
+
+/* Hero terminal layout */
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.heroTermChips {
+  display: none;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+@media (max-width: 899px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .heroTermChips {
+    display: flex;
+  }
+}
