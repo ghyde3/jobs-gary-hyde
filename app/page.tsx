@@ -16,7 +16,7 @@ export default function Home() {
       <NavBar
         logo={
           <span style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <img src="/logo.svg" width={26} height={26} alt="GH" />
+            <img src="/gh-logo-3d.png" width={28} height={28} alt="GH" />
             <span
               style={{
                 fontFamily: 'var(--font-display)',

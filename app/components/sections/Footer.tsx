@@ -1,4 +1,5 @@
 import React from 'react';
+import { Logo3D } from './Logo3D';
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -14,7 +15,7 @@ export function Footer() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/logo.svg" width={26} height={26} alt="GH" />
+          <Logo3D size={56} />
           <span
             style={{
               fontFamily: 'var(--font-mono)',
