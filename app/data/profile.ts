@@ -48,6 +48,21 @@ export const heroTags: string[] = [
 
 export const PROJECTS: Project[] = [
   {
+    id: 7,
+    category: 'AI Product',
+    title: 'Pathara',
+    sub: 'A complete job search service powered by an AI agent pipeline',
+    desc: 'Pathara turns a resume and a short questionnaire into a ranked list of real open jobs, each with a tailored resume, cover letter, and interview prep doc. I built the intake flow, the Claude agent pipeline that does the research and writing, and the per-candidate results portal with downloads and an application tracker.',
+    highlights: [
+      'Claude agent pipeline from intake to finished documents',
+      'Per-candidate portal with downloads and an application tracker',
+      'Supabase auth, row-level security, and storage end to end',
+    ],
+    stack: ['Next.js', 'TypeScript', 'Supabase', 'Claude API', 'Stripe', 'Vercel'],
+    image: '/projects/pathara.png',
+    imageAlt: 'Pathara landing page with the headline "Your job search, handled"',
+  },
+  {
     id: 4,
     category: 'AI Product',
     title: 'Lumi',
@@ -91,6 +106,8 @@ export const PROJECTS: Project[] = [
       'Root-caused a cross-system overselling bug',
     ],
     stack: ['WordPress', 'WooCommerce', 'PHP', 'Odoo 17', 'Python', 'REST APIs'],
+    image: '/projects/woo-multilocation.png',
+    imageAlt: 'Illustration of three warehouses syncing stock through a central node',
   },
   {
     id: 1,
