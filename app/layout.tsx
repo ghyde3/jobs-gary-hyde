@@ -24,11 +24,32 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://jobs.garyhyde.com'),
   title: 'Gary Hyde - Senior Full-Stack Developer',
   description:
     'Senior full-stack developer. I own work end to end, from data model and API through to a polished frontend.',
   icons: {
     icon: '/favicon.svg',
+  },
+  openGraph: {
+    title: 'Gary Hyde - Senior Full-Stack Developer',
+    description:
+      'Senior full-stack developer. I own work end to end, from data model and API through to a polished frontend.',
+    images: [
+      {
+        url: '/gary-hyde-og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Gary Hyde - Senior Full-Stack Developer',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Gary Hyde - Senior Full-Stack Developer',
+    description:
+      'Senior full-stack developer. I own work end to end, from data model and API through to a polished frontend.',
+    images: ['/gary-hyde-og.png'],
   },
 };
 

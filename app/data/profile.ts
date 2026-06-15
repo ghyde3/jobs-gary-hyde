@@ -111,14 +111,14 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 1,
-    category: 'SaaS Platform',
+    category: 'Proof of Concept',
     title: 'TeeTimes',
-    sub: 'Multi-tenant tee time booking platform for golf clubs',
-    desc: 'An OpenTable-style booking SaaS for golf country clubs, built engine-first so every club runs as its own tenant. I designed the data model, the booking engine, and the background job pipeline, with a test-driven task structure and an agent-ready workflow so features land quickly and stay covered.',
+    sub: 'Demo: multi-tenant tee time booking engine built as a collaboration prototype',
+    desc: 'A proof-of-concept booking platform for golf country clubs, built as a demo for a potential collaboration. Not a product being offered. I designed the multi-tenant data model, the booking engine, and the background job pipeline to validate the architecture. The core booking and scheduling patterns from this PoC later shaped Kora.',
     highlights: [
-      'Engine-first multi-tenant architecture',
+      'Engine-first multi-tenant architecture as a PoC',
       'Background jobs on BullMQ and Redis',
-      'Test-driven, agent-ready build workflow',
+      'Booking patterns that later informed Kora',
     ],
     stack: [
       'Next.js 14',

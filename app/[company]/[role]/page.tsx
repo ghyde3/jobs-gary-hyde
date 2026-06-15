@@ -6,6 +6,7 @@ import { RoleHero } from '../../components/sections/RoleHero';
 import { RoleSection } from '../../components/sections/RoleSection';
 import { Skills } from '../../components/sections/Skills';
 import { Models } from '../../components/sections/Models';
+import { HeroTerminal } from '../../components/sections/HeroTerminal';
 import { Notes } from '../../components/sections/Notes';
 import { About } from '../../components/sections/About';
 import { Footer } from '../../components/sections/Footer';
@@ -36,7 +37,7 @@ export async function generateMetadata({
   }
 
   const title =
-    data.seoTitle ?? `${data.roleTitle} at ${data.companyName} - Gary Hyde`;
+    data.seoTitle ?? `Gary Hyde For -> ${data.roleTitle} at ${data.companyName}`;
   const description =
     data.seoDescription ??
     `Gary Hyde's application for the ${data.roleTitle} role at ${data.companyName}.`;
@@ -68,6 +69,7 @@ export default async function RolePage({
   const navLinks = [
     { label: 'Why I fit', href: '#role' },
     { label: 'Selected work', href: '#work' },
+    { label: 'Ask me', href: '#ask' },
     { label: 'Materials', href: '#materials' },
     { label: 'Contact', href: '#contact' },
   ];
@@ -100,6 +102,22 @@ export default async function RolePage({
         <RoleSection role={data} />
         <Skills />
         <Models />
+        <section
+          id="ask"
+          style={{
+            borderTop: '1px solid rgba(255,255,255,0.08)',
+            padding: '80px 0',
+          }}
+        >
+          <div className="container">
+            <div className="section-label">ASK ME ANYTHING</div>
+            <h2 className="section-heading" style={{ marginBottom: '12px' }}>An AI agent trained on my background</h2>
+            <p style={{ fontSize: '17px', color: '#71717A', maxWidth: '520px', lineHeight: '1.65', marginBottom: '40px' }}>
+              Ask about my experience, how I approach a problem, or anything else. It has full context on my background and the work I have shipped.
+            </p>
+            <HeroTerminal boot="ask why should we hire gary?" />
+          </div>
+        </section>
         <Notes />
         <About />
       </main>
