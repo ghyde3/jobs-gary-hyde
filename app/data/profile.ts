@@ -59,6 +59,7 @@ export const PROJECTS: Project[] = [
       'Supabase auth, row-level security, and storage end to end',
     ],
     stack: ['Next.js', 'TypeScript', 'Supabase', 'Claude API', 'Stripe', 'Vercel'],
+    liveUrl: 'https://getpathara.com/',
     image: '/projects/pathara.png',
     imageAlt: 'Pathara landing page with the headline "Your job search, handled"',
   },
