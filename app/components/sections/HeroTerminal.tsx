@@ -8,16 +8,14 @@ import { pulseDots } from './HeroDots';
 
 const MAX_SCROLLBACK = 200;
 
-// Chips that are questions run `ask <question>` so they enter ai mode.
-// Pure commands (pitch 60, fit, etc.) run directly as shell commands.
-const CHIPS = [
-  { label: 'why should we hire gary?', cmd: 'ask why should we hire gary?' },
-  { label: 'pitch 60', cmd: 'pitch 60' },
-  { label: 'fit', cmd: 'fit' },
-  { label: 'concerns', cmd: 'concerns' },
-  { label: 'sudo hire gary', cmd: 'sudo hire gary' },
+// Quick-start buttons inside the console so a visitor can act without typing.
+// `ask` enters gary-ai mode; the others run straight as shell commands.
+const QUICK_ACTIONS = [
+  { label: 'Chat with Gary.Ai', cmd: 'ask', primary: true },
+  { label: 'Pitch 60', cmd: 'pitch 60', primary: false },
+  { label: 'Commands help', cmd: 'help', primary: false },
 ];
-const BOOT_HINT = 'try: pitch 60, fit, or ask why should we hire gary?';
+const BOOT_HINT = 'pick a button below, type a command (try help), or just ask me anything.';
 const BOOT_DELAY_MS = 100;
 const TYPE_MS = 8;
 
@@ -33,9 +31,9 @@ const FOCUS_RING: React.CSSProperties = {
 };
 
 type Mode = 'shell' | 'ai';
-type Props = { boot?: string };
+type Props = { intro?: string };
 
-export function HeroTerminal({ boot = 'gary --profile' }: Props) {
+export function HeroTerminal({ intro }: Props) {
   const [lines, setLines] = useState<string[]>([]);
   const [busy, setBusy] = useState(false);
   const [mode, setMode] = useState<Mode>('shell');
@@ -229,18 +227,17 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
     return runShell(raw);
   };
 
-  // Idle autoplay: demos itself until the visitor interacts.
+  // Idle autoplay: types an intro until the visitor interacts. No command echo,
+  // so it reads as a greeting rather than a duplicate of the header.
   useEffect(() => {
     const timer = setTimeout(async () => {
-      if (!userActed.current) {
-        push(`$ ${boot}`);
-        await handleResult(resolveCommand(boot));
-        if (!userActed.current) push(BOOT_HINT);
-      }
+      if (userActed.current) return;
+      const introLines = intro ? [intro, ''] : [];
+      await typeLines([...introLines, BOOT_HINT]);
     }, BOOT_DELAY_MS);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [boot]);
+  }, [intro]);
 
   const markActed = () => { userActed.current = true; };
 
@@ -347,7 +344,7 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
         lineHeight: 1.7,
         color: '#d4d4d8',
         padding: '12px 14px',
-        height: '280px',
+        height: '248px',
         overflowY: 'auto',
         whiteSpace: 'pre-wrap',
         wordBreak: 'break-word',
@@ -451,6 +448,63 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
           {lines.join('\n')}
         </div>
 
+        {/* Quick-action buttons: act without typing */}
+        <div
+          style={{
+            display: 'flex',
+            gap: '8px',
+            flexWrap: 'wrap',
+            padding: '12px 14px',
+            borderTop: '1px solid rgba(255,255,255,0.07)',
+            flexShrink: 0,
+          }}
+        >
+          {QUICK_ACTIONS.map((a) => (
+            <button
+              key={a.label}
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                markActed();
+                inputRef.current?.focus();
+                void run(a.cmd);
+              }}
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '12px',
+                color: a.primary ? '#F59E0B' : '#d4d4d8',
+                background: a.primary ? 'rgba(245,158,11,0.1)' : 'rgba(255,255,255,0.05)',
+                border: a.primary
+                  ? '1px solid rgba(245,158,11,0.4)'
+                  : '1px solid rgba(255,255,255,0.14)',
+                borderRadius: '6px',
+                padding: '7px 12px',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              {a.primary && (
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z" />
+                </svg>
+              )}
+              {a.label}
+            </button>
+          ))}
+        </div>
+
         {/* Input row */}
         <div
           style={{
@@ -485,29 +539,6 @@ export function HeroTerminal({ boot = 'gary --profile' }: Props) {
             }}
           />
         </div>
-      </div>
-
-      {/* Chips row */}
-      <div className="heroTermChips">
-        {CHIPS.map((c) => (
-          <button
-            key={c.label}
-            type="button"
-            onClick={() => { markActed(); void run(c.cmd); }}
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '12px',
-              color: '#d4d4d8',
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.12)',
-              borderRadius: '6px',
-              padding: '6px 10px',
-              cursor: 'pointer',
-            }}
-          >
-            {c.label}
-          </button>
-        ))}
       </div>
     </div>
   );

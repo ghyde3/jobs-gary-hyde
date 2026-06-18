@@ -2,11 +2,10 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { NavBar } from '../../components/NavBar';
-import { RoleHero } from '../../components/sections/RoleHero';
+import { HeroConsole } from '../../components/sections/HeroConsole';
 import { RoleSection } from '../../components/sections/RoleSection';
 import { Skills } from '../../components/sections/Skills';
 import { Models } from '../../components/sections/Models';
-import { HeroTerminal } from '../../components/sections/HeroTerminal';
 import { Notes } from '../../components/sections/Notes';
 import { About } from '../../components/sections/About';
 import { Footer } from '../../components/sections/Footer';
@@ -69,7 +68,6 @@ export default async function RolePage({
   const navLinks = [
     { label: 'Why I fit', href: '#role' },
     { label: 'Selected work', href: '#work' },
-    { label: 'Ask me', href: '#ask' },
     { label: 'Materials', href: '#materials' },
     { label: 'Contact', href: '#contact' },
   ];
@@ -95,29 +93,15 @@ export default async function RolePage({
     <>
       <NavBar logo={logoNode} links={navLinks} />
       <main style={{ paddingTop: '60px' }}>
-        <RoleHero
+        <HeroConsole
           headline={data.hero.headline}
-          subhead={data.hero.subhead}
+          intro={data.hero.subhead}
+          ctaPrimary={{ label: 'See why I fit', href: '#role' }}
+          ctaSecondary={{ label: 'Get in touch', href: '#contact' }}
         />
         <RoleSection role={data} />
         <Skills />
         <Models />
-        <section
-          id="ask"
-          style={{
-            borderTop: '1px solid rgba(255,255,255,0.08)',
-            padding: '80px 0',
-          }}
-        >
-          <div className="container">
-            <div className="section-label">ASK ME ANYTHING</div>
-            <h2 className="section-heading" style={{ marginBottom: '12px' }}>An AI agent trained on my background</h2>
-            <p style={{ fontSize: '17px', color: '#71717A', maxWidth: '520px', lineHeight: '1.65', marginBottom: '40px' }}>
-              Ask about my experience, how I approach a problem, or anything else. It has full context on my background and the work I have shipped.
-            </p>
-            <HeroTerminal boot="ask why should we hire gary?" />
-          </div>
-        </section>
         <Notes />
         <About />
       </main>

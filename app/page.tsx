@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavBar } from './components/NavBar';
 import { Button } from './components/Button';
-import { Hero } from './components/sections/Hero';
+import { HeroConsole } from './components/sections/HeroConsole';
+import { PROFILE } from './data/profile';
 import { Work } from './components/sections/Work';
 import { Skills } from './components/sections/Skills';
 import { Models } from './components/sections/Models';
@@ -44,7 +45,12 @@ export default function Home() {
         }
       />
       <main style={{ paddingTop: '60px' }}>
-        <Hero />
+        <HeroConsole
+          headline={PROFILE.title}
+          intro={PROFILE.summary}
+          ctaPrimary={{ label: 'View my work', href: '#work' }}
+          ctaSecondary={{ label: 'Get in touch', href: '#contact' }}
+        />
         <Work />
         <Skills />
         <Models />
