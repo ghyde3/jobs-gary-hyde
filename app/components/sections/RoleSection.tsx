@@ -397,7 +397,7 @@ export function RoleSection({ role }: RoleSectionProps) {
                   Message sent
                 </div>
                 <div style={{ fontSize: '13px', color: '#A1A1AA' }}>
-                  I will be in touch within one business day.
+                  Thank you for reaching out, I'll be in contact soon.
                 </div>
               </div>
             ) : (
