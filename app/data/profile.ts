@@ -52,13 +52,13 @@ export const PROJECTS: Project[] = [
     category: 'AI Product',
     title: 'Pathara',
     sub: 'A complete job search service powered by an AI agent pipeline',
-    desc: 'Pathara turns a resume and a short questionnaire into a ranked list of real open jobs, each with a tailored resume, cover letter, and interview prep doc. I built the intake flow, the Claude agent pipeline that does the research and writing, and the per-candidate results portal with downloads and an application tracker.',
+    desc: 'Pathara turns a resume and a short questionnaire into a ranked list of real open jobs, each with a tailored resume, cover letter, and interview prep doc. I built the intake flow, the AI agent pipeline that does the research and writing, and the per-candidate results portal with downloads and an application tracker.',
     highlights: [
-      'Claude agent pipeline from intake to finished documents',
+      'AI agent pipeline from intake to finished documents',
       'Per-candidate portal with downloads and an application tracker',
       'Supabase auth, row-level security, and storage end to end',
     ],
-    stack: ['Next.js', 'TypeScript', 'Supabase', 'Claude API', 'Stripe', 'Vercel'],
+    stack: ['Next.js', 'TypeScript', 'Supabase', 'AI agents', 'Stripe', 'Vercel'],
     liveUrl: 'https://getpathara.com/',
     image: '/projects/pathara.png',
     imageAlt: 'Pathara landing page with the headline "Your job search, handled"',
@@ -173,8 +173,8 @@ export const SKILLS: Record<string, string[]> = {
   Frontend: ['React', 'Next.js 14', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'SASS / SCSS'],
   Backend: ['Node.js', 'Express', 'PostgreSQL', 'Drizzle ORM', 'Redis', 'BullMQ', 'REST APIs'],
   'AI & Tooling': [
-    'Cursor IDE',
-    'Claude Code',
+    'AI-augmented development',
+    'AI agent workflows',
     'AI code review',
     'Multi-model synthesis',
     'Prompt engineering',
@@ -186,7 +186,7 @@ export const STATS: Stat[] = [
   { n: '10+', label: 'Years in production' },
   { n: '12+', label: 'Years building independently' },
   { n: '6+', label: 'Projects shipped end to end' },
-  { n: 'AI-native', label: 'Cursor + Claude Code workflow' },
+  { n: 'AI-native', label: 'AI-augmented workflow' },
 ];
 
 export interface Model {
