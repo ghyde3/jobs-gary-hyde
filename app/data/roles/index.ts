@@ -1,5 +1,12 @@
 import type { RoleData } from './types';
 import { vercelUiEngineer } from './vercel/ui-engineer';
+import { ashbyStaffProductEngineer } from './ashby/staff-product-engineer';
+import { ashbySeniorProductEngineer } from './ashby/senior-product-engineer';
+import { grafanaLabsSeniorAiEngineer } from './grafana-labs/senior-ai-engineer';
+import { extendSeniorAiSoftwareEngineer } from './extend/senior-ai-software-engineer';
+import { tailscaleFullStackSoftwareEngineer } from './tailscale/full-stack-software-engineer';
+import { prairieLearnFullStackSoftwareEngineer } from './prairielearn/full-stack-software-engineer';
+import { rapidsosSeniorSoftwareEngineerAiOperations } from './rapidsos/senior-software-engineer-ai-operations';
 
 /**
  * Registry of all role data objects.
@@ -8,6 +15,13 @@ import { vercelUiEngineer } from './vercel/ui-engineer';
  */
 const roleList: RoleData[] = [
   vercelUiEngineer,
+  ashbyStaffProductEngineer,
+  ashbySeniorProductEngineer,
+  grafanaLabsSeniorAiEngineer,
+  extendSeniorAiSoftwareEngineer,
+  tailscaleFullStackSoftwareEngineer,
+  prairieLearnFullStackSoftwareEngineer,
+  rapidsosSeniorSoftwareEngineerAiOperations,
 ];
 
 export const ROLES: Record<string, RoleData> = Object.fromEntries(
