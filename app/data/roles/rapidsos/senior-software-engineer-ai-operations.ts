@@ -22,13 +22,13 @@ export const rapidsosSeniorSoftwareEngineerAiOperations: RoleData = {
     'is the loop I already run every week.',
 
     'The clearest proof is Pathara, an AI product I built end to end. I took it from the intake ' +
-    'flow through a deployed Claude agent pipeline that does the research and writing, to a ' +
+    'flow through a deployed AI agent pipeline that does the research and writing, to a ' +
     'per-candidate results portal with downloads and an application tracker, on Supabase with ' +
     'row-level security and storage throughout. There was no separate backend, frontend, or ' +
     'design resource. The idea, the pipeline, and the production deploy were all mine, which is ' +
     'exactly the shape of work this role describes.',
 
-    'I also live in the tools you name. Claude Code and Cursor are my daily drivers, not novelties ' +
+    'I also live in the kind of tools this role names. AI coding agents are my daily drivers, not novelties ' +
     'I tried once, and on my current team I built internal AI tooling that synthesizes multiple ' +
     'models into structured code-review scorecards with Ship, Fix, and No-Ship verdicts. So when ' +
     'the role asks for someone who can evaluate and adopt agentic coding tools and turn them into ' +
@@ -52,22 +52,22 @@ export const rapidsosSeniorSoftwareEngineerAiOperations: RoleData = {
         'I built internal code-review tooling that runs multiple AI models and synthesizes their ' +
         'output into structured scorecards with Ship, Fix, and No-Ship verdicts, which raised my ' +
         "team's human-in-the-loop review bar. Pathara is the same instinct turned outward: a full " +
-        'Claude agent pipeline doing real work in production.',
+        'AI agent pipeline doing real work in production.',
     },
     {
       requirement:
         'Take an idea to a deployed production system quickly and independently.',
       proof:
-        'Pathara went from a blank intake form to a live Claude agent pipeline and a candidate ' +
+        'Pathara went from a blank intake form to a live AI agent pipeline and a candidate ' +
         'results portal, built and shipped by me. Kora and Lumi followed the same path, idea to ' +
         'deployed product solo, so working without a big team behind me is the normal case, not ' +
         'the exception.',
     },
     {
       requirement:
-        'Evaluate and adopt agentic coding tools like Claude Code, Cursor, and Copilot.',
+        'Evaluate and adopt agentic coding tools.',
       proof:
-        'Claude Code and Cursor are my daily drivers, and I treat the harness around the model, the ' +
+        'AI coding agents are my daily drivers, and I treat the harness around the model, the ' +
         'tools, verification steps, and context discipline, as the real source of quality. I am ' +
         'already the person who tries a new agentic tool, decides where it earns a place, and wires ' +
         'it into a repeatable workflow.',
@@ -86,7 +86,7 @@ export const rapidsosSeniorSoftwareEngineerAiOperations: RoleData = {
     {
       projectTitle: 'Pathara',
       framing:
-        'AI product built end to end: intake flow, deployed Claude agent pipeline, candidate results portal, all mine.',
+        'AI product built end to end: intake flow, deployed AI agent pipeline, candidate results portal, all mine.',
     },
     {
       projectTitle: 'Lumi',

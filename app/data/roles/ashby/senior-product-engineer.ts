@@ -9,10 +9,17 @@ export const ashbySeniorProductEngineer: RoleData = {
   hero: {
     headline: 'Full-stack features, schema to UI, in one TypeScript codebase',
     subhead:
-      'I ship product features end to end in TypeScript: React on the front, Node on the back, PostgreSQL and Redis underneath. I work the way Ashby works, async and in writing, with the autonomy to take a feature from data model to deployed UI without waiting on a meeting.',
+      'I built Pathara, an AI product that runs the job search for candidates: an AI agent pipeline that turns a resume into ranked matches with tailored materials. Ashby is all-in-one recruiting software with AI woven through every layer, so I have already built in this exact AI-for-hiring space, just from the candidate side. And I ship features end to end in TypeScript: React on the front, Node on the back, PostgreSQL and Redis underneath, the way Ashby works, async and in writing, with the autonomy to take a feature from data model to deployed UI without waiting on a meeting.',
   },
 
   note: [
+    'Here is the part I want up front: I built Pathara, an AI product that runs the job search for ' +
+    'candidates. It is an AI agent pipeline that takes a resume, ranks it against real roles, and ' +
+    'generates tailored materials for each match. Ashby is all-in-one recruiting software with AI ' +
+    'embedded in every layer, so I have already shipped in exactly this AI-for-hiring space, just ' +
+    'from the candidate side of the same problem. That is not a talking point I reverse-engineered ' +
+    'from the job post. It is what I was already building.',
+
     'I am applying for the Senior Product Engineer role at Ashby. What pulled me in is the shape ' +
     'of the work: end-to-end TypeScript, React and Node sharing one language, GraphQL over ' +
     'PostgreSQL with Redis where it earns its place, and senior engineers trusted to own a ' +
@@ -28,7 +35,7 @@ export const ashbySeniorProductEngineer: RoleData = {
     'Ashby being async-first and almost meeting-free is a feature for me, not a hurdle. I have ' +
     'worked remotely for over a decade, and the artifacts I leave behind (specs, plans, review ' +
     'notes) are written so a distributed team can act on them without a call. I also build with ' +
-    'Claude Code and Cursor as part of the harness, which means I move faster on the parts that ' +
+    'AI as part of my daily workflow, which means I move faster on the parts that ' +
     'are mechanical and spend the saved time on the parts that actually need judgment.',
   ],
 
@@ -90,7 +97,7 @@ export const ashbySeniorProductEngineer: RoleData = {
     {
       projectTitle: 'Pathara',
       framing:
-        'Full-stack AI product in TypeScript: Postgres data layer, Claude agent pipeline, candidate-facing UI, all mine.',
+        'Full-stack AI product in TypeScript: Postgres data layer, AI agent pipeline, candidate-facing UI, all mine.',
     },
   ],
 

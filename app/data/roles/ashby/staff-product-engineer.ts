@@ -7,13 +7,20 @@ export const ashbyStaffProductEngineer: RoleData = {
   roleTitle: 'Staff Product Engineer',
 
   hero: {
-    headline: 'One TypeScript codebase, owned from schema to UI',
+    headline: 'I built AI for hiring from the candidate side',
     subhead:
-      'I build products end to end in a single TypeScript stack: React on the frontend, Node.js and PostgreSQL on the backend, no handoffs. That is how I already work, and it is how Ashby builds.',
+      'I built Pathara, an AI product that runs the job search for candidates: an AI agent pipeline that turns a resume into ranked matches with tailored materials. Ashby is all-in-one recruiting software with AI in every layer, so I have already built in exactly this space, just from the other side of the table.',
   },
 
   note: [
-    'Ashby is the rare team where the way you describe the work matches the way I actually work. ' +
+    'The reason I am drawn to Ashby is simple: I have already built in your space. I built Pathara, ' +
+    'an AI product that runs the job search for candidates, an AI agent pipeline that takes a resume ' +
+    'and turns it into ranked role matches with tailored application materials. Ashby is all-in-one ' +
+    'recruiting software with AI embedded in every layer, so I have lived inside the AI-for-hiring ' +
+    'problem end to end, just from the candidate side rather than the recruiter side. I know where ' +
+    'this gets hard and where it gets valuable.',
+
+    'Ashby is also the rare team where the way you describe the work matches the way I actually work. ' +
     'One TypeScript codebase, React and Node and GraphQL and PostgreSQL, engineers owning projects ' +
     'from the schema all the way to the UI. I have spent the last several years building products ' +
     'exactly that way, by myself, because that is the only way to ship when you are the whole team.',
@@ -22,8 +29,8 @@ export const ashbyStaffProductEngineer: RoleData = {
     'than through meetings, and that fits how I operate. I work async-first, I document decisions in ' +
     'specs and plans that other people can act on without a call, and I raise the quality bar by ' +
     'setting conventions and building the tooling that enforces them. I also lean hard on ' +
-    'AI-augmented development with Claude Code and Cursor, not as a novelty but as a real ' +
-    'multiplier on how much I can design, build, and review in a day.',
+    'AI built into my daily workflow, in place since the tools became genuinely useful, not as a ' +
+    'novelty but as a real multiplier on how much I can design, build, and review in a day.',
 
     'What I want to own at Ashby is the part of the product where end-to-end judgment matters most: ' +
     'the data model that has to be right before anything above it can be, and the UI that proves it ' +
@@ -47,7 +54,7 @@ export const ashbyStaffProductEngineer: RoleData = {
         'Own projects end to end, from data model and schema through to the shipped UI, with high autonomy.',
       proof:
         'I designed the multi-tenant data model and booking engine for TeeTimes, the payments and ' +
-        'review pipeline for Kora, and the full Claude agent pipeline plus results portal for Pathara. ' +
+        'review pipeline for Kora, and the full AI agent pipeline plus results portal for Pathara. ' +
         'Each was scoped, built, and shipped by me without a separate design or backend resource.',
     },
     {
@@ -63,7 +70,7 @@ export const ashbyStaffProductEngineer: RoleData = {
       requirement:
         'Express staff-level technical leadership through building, raising the quality bar, and mentoring through code and written artifacts.',
       proof:
-        'I built automated code review tooling (Cursor Skills) that synthesizes multiple AI models into ' +
+        'I built automated code review tooling that synthesizes multiple AI models into ' +
         'structured scorecards with Ship, Fix, and No-Ship verdicts, raising the team review standard. ' +
         'I also designed a Git commit convention (Mission Codes) for our Odoo.sh environments to keep a ' +
         'multi-developer workflow traceable. Leadership through tooling and conventions, not status meetings.',
@@ -72,9 +79,9 @@ export const ashbyStaffProductEngineer: RoleData = {
       requirement:
         'Use modern tooling, including AI, to move faster without dropping quality.',
       proof:
-        'I treat Claude Code and Cursor as force multipliers, not autocomplete. I introduced ' +
+        'I treat AI in my daily workflow as a force multiplier, not autocomplete. I introduced ' +
         'AI-augmented workflows on my current team that compressed feature delivery while keeping the ' +
-        'documentation and review standards intact, and I built Pathara, an AI product, on the Claude API ' +
+        'documentation and review standards intact, and I built Pathara, an AI product, ' +
         'end to end.',
     },
   ],
@@ -83,7 +90,7 @@ export const ashbyStaffProductEngineer: RoleData = {
     {
       projectTitle: 'Pathara',
       framing:
-        'AI product owned end to end: Next.js, TypeScript, Supabase Postgres, and a Claude agent pipeline from intake to finished documents.',
+        'AI product owned end to end: Next.js, TypeScript, Supabase Postgres, and an AI agent pipeline from intake to finished documents.',
     },
     {
       projectTitle: 'TeeTimes',

@@ -9,7 +9,7 @@ export const extendSeniorAiSoftwareEngineer: RoleData = {
   hero: {
     headline: 'I build the internal AI tooling that makes a team ship faster',
     subhead:
-      'Internal Enablement is the work I already reach for. I have shipped team-facing developer tooling, an AI code-review system that synthesizes multiple models into one verdict, and an agent pipeline in production. I use Claude Code and Cursor every day.',
+      'Internal Enablement is the work I already reach for. I have shipped team-facing developer tooling, an AI code-review system that synthesizes multiple models into one verdict, and an agent pipeline in production. AI coding agents are part of how I build every day.',
   },
 
   note: [
@@ -28,9 +28,9 @@ export const extendSeniorAiSoftwareEngineer: RoleData = {
     'not just one feature.',
 
     'On the AI side I am hands on with agent work in production. Pathara is a job-search ' +
-    'product I built around a Claude API managed-agent pipeline, with per-run cost and token ' +
-    'telemetry and per-candidate data isolation. TypeScript and Node are my core stack and I ' +
-    'live in Claude Code and Cursor daily. Python is a working second language for me, used in ' +
+    'product I built around a managed AI agent pipeline, with per-run cost and token ' +
+    'telemetry and per-candidate data isolation. TypeScript and Node are my core stack and ' +
+    'AI coding agents are woven into how I work day to day. Python is a working second language for me, used in ' +
     'real integration work rather than a primary, and I would rather tell you that plainly than ' +
     'oversell it. The judgment for what makes a tool worth other engineers trusting is the part ' +
     'I am confident about.',
@@ -58,10 +58,10 @@ export const extendSeniorAiSoftwareEngineer: RoleData = {
     },
     {
       requirement:
-        'Experience with at least one agent framework (Claude Code, LangChain, CrewAI, AutoGen, or OpenAI Agents SDK).',
+        'Experience with at least one agent framework.',
       proof:
-        'I use Claude Code daily, both as my primary build environment and as the engine of ' +
-        'an agent pipeline. Pathara runs on Claude API managed agents that handle research and ' +
+        'AI coding agents are my primary build environment, and I run an agent pipeline of my ' +
+        'own. Pathara runs on managed AI agents that handle research and ' +
         'document generation end to end, with per-run cost and token telemetry and no ' +
         'self-hosted workers to babysit.',
     },
@@ -76,9 +76,9 @@ export const extendSeniorAiSoftwareEngineer: RoleData = {
     },
     {
       requirement:
-        'Familiarity with MCP and OpenTelemetry for tooling and observability.',
+        'Familiarity with agent tooling and observability.',
       proof:
-        'I work in MCP-driven agent setups daily through Claude Code and treat the harness ' +
+        'I work in agent-driven setups daily and treat the harness ' +
         'around the model, including tooling and verification, as where the quality lives. On ' +
         'the observability side I have built per-run cost and token telemetry into Pathara, so ' +
         'instrumenting tooling for traceability is a habit, not a new concept for me.',
@@ -89,7 +89,7 @@ export const extendSeniorAiSoftwareEngineer: RoleData = {
     {
       projectTitle: 'Pathara',
       framing:
-        'AI agent pipeline in production: Claude API managed agents, per-run cost and token telemetry, per-candidate data isolation. TypeScript and Next.js.',
+        'AI agent pipeline in production: managed AI agents, per-run cost and token telemetry, per-candidate data isolation. TypeScript and Next.js.',
     },
     {
       projectTitle: 'TeeTimes',

@@ -30,7 +30,7 @@ export const prairieLearnFullStackSoftwareEngineer: RoleData = {
     'full-stack engineer who is genuinely fluent in Node.js, TypeScript, PostgreSQL, and React, and ' +
     'who also builds with LLM and agent tooling as a real part of the product and a real part of the ' +
     'workflow. I built an AI agent product end to end, I built multi-model code-review tooling for my ' +
-    'current team, and I work in Claude Code and Cursor every day. I would like the chance to show how ' +
+    'current team, and AI coding agents have been part of my daily workflow since the tools became usable. I would like the chance to show how ' +
     'much that adds up to on a small, autonomous team.',
   ],
 
@@ -56,11 +56,11 @@ export const prairieLearnFullStackSoftwareEngineer: RoleData = {
       requirement:
         'LLM and agent tooling, both inside the product and in how the team builds.',
       proof:
-        'I built Pathara, an AI product, end to end on the Claude API: an agent pipeline that takes a ' +
+        'I built Pathara, an AI product, end to end: an agent pipeline that takes a ' +
         'resume and questionnaire and returns ranked job matches with a tailored resume, cover letter, ' +
         'and interview prep per match. On my current team I built automated code-review tooling that ' +
-        'synthesizes multiple AI models into structured Ship, Fix, and No-Ship scorecards, and I work ' +
-        'in Claude Code and Cursor every day.',
+        'synthesizes multiple AI models into structured Ship, Fix, and No-Ship scorecards, and AI coding ' +
+        'agents are part of how I build every day.',
     },
     {
       requirement:
@@ -86,7 +86,7 @@ export const prairieLearnFullStackSoftwareEngineer: RoleData = {
     {
       projectTitle: 'Pathara',
       framing:
-        'AI agent product owned end to end: Next.js and TypeScript frontend, Supabase Postgres backend, and a Claude agent pipeline from intake to finished documents.',
+        'AI agent product owned end to end: Next.js and TypeScript frontend, Supabase Postgres backend, and an AI agent pipeline from intake to finished documents.',
     },
     {
       projectTitle: 'TeeTimes',
