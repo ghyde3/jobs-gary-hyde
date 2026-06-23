@@ -7,6 +7,7 @@ import { extendSeniorAiSoftwareEngineer } from './extend/senior-ai-software-engi
 import { tailscaleFullStackSoftwareEngineer } from './tailscale/full-stack-software-engineer';
 import { prairieLearnFullStackSoftwareEngineer } from './prairielearn/full-stack-software-engineer';
 import { rapidsosSeniorSoftwareEngineerAiOperations } from './rapidsos/senior-software-engineer-ai-operations';
+import { adventhealthProductEngineer } from './adventhealth/product-engineer';
 
 /**
  * Registry of all role data objects.
@@ -22,6 +23,7 @@ const roleList: RoleData[] = [
   tailscaleFullStackSoftwareEngineer,
   prairieLearnFullStackSoftwareEngineer,
   rapidsosSeniorSoftwareEngineerAiOperations,
+  adventhealthProductEngineer,
 ];
 
 export const ROLES: Record<string, RoleData> = Object.fromEntries(
