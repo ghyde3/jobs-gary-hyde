@@ -72,7 +72,7 @@ export const vercelUiEngineer: RoleData = {
       requirement:
         'Comfort working in an async, remote-first environment with high written-communication standards.',
       proof:
-        'I have worked independently and remotely for 10+ years. My planning and communication ' +
+        'I have worked independently and remotely for 14+ years. My planning and communication ' +
         'artifacts (specs, plans, review summaries) are written to the standard a distributed team ' +
         'needs to act on them without a meeting.',
     },

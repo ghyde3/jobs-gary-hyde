@@ -64,7 +64,7 @@ export const tailscaleFullStackSoftwareEngineer: RoleData = {
       requirement:
         'Thrives in an async-first, written-first culture with infrequent, intentional meetings.',
       proof:
-        'I have worked remotely for 10+ years and run on writing rather than meetings. My specs, ' +
+        'I have worked remotely for 14+ years and run on writing rather than meetings. My specs, ' +
         'plans, and review summaries are written to the standard a distributed team needs to act on ' +
         'them without scheduling a call.',
     },

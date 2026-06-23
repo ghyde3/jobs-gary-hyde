@@ -104,7 +104,7 @@ export const extendSeniorAiSoftwareEngineer: RoleData = {
   ],
 
   breadthNote:
-    'I have spent 10+ years shipping production software and the last few years building the ' +
+    'I have spent 14+ years shipping production software and the last few years building the ' +
     'harness around AI tools rather than just prompting them. Internal enablement is where ' +
     'that habit pays off: the leverage is in the tooling and the process wrapped around the ' +
     'model, and that is the work I most want to own.',

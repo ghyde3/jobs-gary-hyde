@@ -78,7 +78,7 @@ export const grafanaLabsSeniorAiEngineer: RoleData = {
       requirement:
         'Comfortable in a fully remote, async environment, owning automation from design through ship.',
       proof:
-        'I have worked independently and remotely for over ten years. I default to writing the spec, the ' +
+        'I have worked independently and remotely for over fourteen years. I default to writing the spec, the ' +
         'plan, and the decision down so the next person or the next agent can act without a meeting. Every ' +
         'product in my portfolio was scoped, built, and shipped by me end to end, which is the same ' +
         'ownership an internal automation team runs on.',

@@ -75,7 +75,7 @@ export const prairieLearnFullStackSoftwareEngineer: RoleData = {
       requirement:
         'Thrive on a small, autonomous team that ships without heavy process.',
       proof:
-        'I have worked independently and remotely for over ten years, scoping and shipping products ' +
+        'I have worked independently and remotely for over fourteen years, scoping and shipping products ' +
         'solo because there was never a second engineer to hand work to. I write the spec, the plan, ' +
         'and the decision down so the work moves without a meeting, and I move fastest exactly when the ' +
         'process is light and the autonomy is high.',

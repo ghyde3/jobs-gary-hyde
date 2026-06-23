@@ -34,7 +34,7 @@ export const PROFILE = {
   location: 'Orlando metro, Florida',
   badge: 'Open to senior and lead roles',
   summary:
-    'I have spent 10+ years shipping production web applications across React, Next.js, Node.js, and PostgreSQL. I own work end to end, from the data model and API through to a polished, fast frontend, and I build with AI-augmented workflows that compress the cycle without cutting corners.',
+    'I have spent 14+ years shipping production web applications across React, Next.js, Node.js, and PostgreSQL. I own work end to end, from the data model and API through to a polished, fast frontend, and I build with AI-augmented workflows that compress the cycle without cutting corners.',
 } as const;
 
 export const heroTags: string[] = [
@@ -183,7 +183,7 @@ export const SKILLS: Record<string, string[]> = {
 };
 
 export const STATS: Stat[] = [
-  { n: '10+', label: 'Years in production' },
+  { n: '14+', label: 'Years in production' },
   { n: '12+', label: 'Years building independently' },
   { n: '6+', label: 'Projects shipped end to end' },
   { n: 'AI-native', label: 'AI-augmented workflow' },

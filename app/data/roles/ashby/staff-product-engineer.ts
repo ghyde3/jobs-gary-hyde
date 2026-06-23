@@ -61,7 +61,7 @@ export const ashbyStaffProductEngineer: RoleData = {
       requirement:
         'Thrive in an async-first, almost-no-meeting culture with high written-communication standards.',
       proof:
-        'I have worked independently and remotely for over ten years. My default is to write the spec, ' +
+        'I have worked independently and remotely for over fourteen years. My default is to write the spec, ' +
         'the plan, and the decision down so the next person (or the next agent) can act on it without a ' +
         'meeting. I authored a stock-overselling incident report tracing a bug across two systems to ' +
         'root cause, the kind of written artifact an async team actually relies on.',

@@ -77,7 +77,7 @@ export const ashbySeniorProductEngineer: RoleData = {
       requirement:
         'Thrives in an async-first, almost-no-meeting culture with high written-communication standards.',
       proof:
-        'I have built independently and remotely for 10+ years. My specs, plans, and review ' +
+        'I have built independently and remotely for 14+ years. My specs, plans, and review ' +
         'summaries are written to a standard a distributed team can act on without a meeting, ' +
         'because for most of my career there was no meeting to fall back on.',
     },
